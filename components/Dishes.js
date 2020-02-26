@@ -28,7 +28,7 @@ export default class Dishes extends React.Component {
       headerRight: (
         <CartButton
         onPress = {() => {
-          navigate('Cart');
+          navigation.navigate('Cart');
           }}
         />
       )
