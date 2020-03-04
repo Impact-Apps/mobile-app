@@ -35,9 +35,8 @@ export default class Dishes extends React.Component {
     };
   };
 
-  handleNaviagation = () => {
-    console.log('dishsed')
-    this.props.navigation.navigate("Dishes");
+  handleNaviagation = (item) => {
+    this.props.navigation.navigate("ItemDetails", {item});
   };
   render() {
     return (
@@ -53,7 +52,7 @@ export default class Dishes extends React.Component {
               price={item.price}
               label={item.label}
               isVegetarian={item.isVegetarian}
-              handleNaviagation={this.handleNaviagation}
+              handleNaviagation={() => this.handleNaviagation(item)}
             />
           )}
         />
