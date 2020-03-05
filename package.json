@@ -33,7 +33,9 @@
     "react-native-simple-stepper": "^3.0.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^2.11.2",
-    "react-simple-stepper": "^1.0.1"
+    "react-redux": "^7.2.0",
+    "react-simple-stepper": "^1.0.1",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

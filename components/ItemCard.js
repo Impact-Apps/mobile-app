@@ -11,17 +11,6 @@ const BASE_URL = Config.NGROK_HTTPS_URL;
 const ItemCard = ({item, qty, qtyChanged, addToCart}) => {
   const {id, image, price, name} = item;
 
-//   {
-//     "id": "2",
-//     "name": "Dosa",
-//     "isVegetarian": true,
-//     "cuisine": "South Indian",
-//     "image": "https://res.cloudinary.com/sivadass/image/upload/v1534611353/dummy-products/food/dosa.jpg",
-//     "price": "₹ 75",
-//     "label": "1 piece",
-//     "rating": 5
-//   },
-
   const restaurant = {
       name: 'Rest Name'
   }

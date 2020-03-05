@@ -4,8 +4,6 @@ import {
   Text,
   View,
   FlatList,
-  Image,
-  TouchableOpacity
 } from "react-native";
 import restaurantsData from "../api/restaurants.json";
 import RestaurantItem from "./RestaurantItem";

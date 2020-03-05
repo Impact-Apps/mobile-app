@@ -1,11 +1,16 @@
 import React from 'react';
 import {Alert} from 'react-native';
-
 import CartButton from "./common/CartButton";
-
 import ItemCard from './ItemCard';
+import { connect } from 'react-redux';
+import { addToCart} from '../redux';
 
-export default class ItemDetails extends React.Component {
+const mapDtoP = (dispatch) =>{
+  return {
+    addToCart: item => dispatch(addToCart(item))
+  }
+}
+class ItemDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: "Item Details",
@@ -15,7 +20,8 @@ export default class ItemDetails extends React.Component {
         },
         headerRight: (
           <CartButton
-            onPress={() => { navigation.navigate('Cart');}}
+            onPress={() => {
+              navigation.navigate('Cart');}}
           />
         )
       };
@@ -39,10 +45,6 @@ export default class ItemDetails extends React.Component {
   };
 
   addToCart = (item, qty) => {
-    // const item_id = this.context.cart_items.findIndex(
-    //   el => el.restaurant.id !== item.restaurant.id,
-    // );
-    // if (item_id === -1) {
     console.log('added to cart', 
       'Added to basket',
       `${qty} ${item.name} was added to the basket.`)
@@ -50,13 +52,7 @@ export default class ItemDetails extends React.Component {
       'Added to basket',
       `${qty} ${item.name} was added to the basket.`,
     );
-      // this.context.addToCart(item, qty);
-    // } else {
-    //   Alert.alert(
-    //     'Cannot add to basket',
-    //     'You can only order from one restaurant for each order.',
-    //   );
-    // }
+    this.props.addToCart({...item, quantity: qty});
   };
 
   render() {
@@ -71,3 +67,6 @@ export default class ItemDetails extends React.Component {
     );
   }
 }
+const ConnectedItemDetails = connect(null, mapDtoP)(ItemDetails);
+
+export default ConnectedItemDetails;

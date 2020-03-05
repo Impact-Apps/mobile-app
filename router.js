@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, TouchableOpacity, Text, Image } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import RestaurantsScreen from "./components/Restaurants";
 import DishesScreen from "./components/Dishes";

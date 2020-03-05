@@ -1,48 +1,45 @@
 import React from "react";
 import { Image, Text, View, TouchableOpacity } from 'react-native';
+import {connect} from "react-redux";
 
-class CartButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleNavigate = this.handleNavigate.bind(this);
-  }
 
-  handleNavigate = () => {
-    this.props.onPress();
-  };
-
-  render() {
-    return (
-      <TouchableOpacity onPress={this.handleNavigate}>
+const mapStateToProps = (state) =>{
+    return {
+        numOfItems: state.items.numOfItems
+    }
+}
+const CartButton = props => (
+      <TouchableOpacity onPress={props.onPress}>
         <Image
           style={{ width: 32, height: 32, marginRight: 16 }}
           source={require('../../assets/shopping-bag.png')}
         />
-        <View
-          style={{
-            height: 20,
-            width: 20,
-            borderRadius: 10,
-            backgroundColor: '#ef6136',
-            position: 'absolute',
-            right: 8,
-            top: 2
-          }}
-        >
-          <Text
-            style={{
-              color: '#fff',
-              fontSize: 13,
-              textAlign: 'center',
-              lineHeight: 20
-            }}
-          >
-            12
-          </Text>
-        </View>
+          {props.numOfItems === 0 ? null :
+              <View
+                  style={{
+                      height: 20,
+                      width: 20,
+                      borderRadius: 10,
+                      backgroundColor: '#ef6136',
+                      position: 'absolute',
+                      right: 8,
+                      top: 2
+                  }}
+              >
+                  <Text
+                      style={{
+                          color: '#fff',
+                          fontSize: 13,
+                          textAlign: 'center',
+                          lineHeight: 20
+                      }}
+                  >
+                      {props.numOfItems}
+                  </Text>
+              </View>
+          }
       </TouchableOpacity>
-    );
-  }
-}
+    )
 
-export default CartButton;
+const ConnectedCartButton = connect(mapStateToProps, null)(CartButton)
+export default ConnectedCartButton;

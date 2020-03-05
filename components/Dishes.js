@@ -1,14 +1,9 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Button
+  FlatList
 } from "react-native";
-import Constants from "../constants/constants";
 import foodData from "../food-data.json";
 import ListItem from "./ListItem";
 import CartButton from "./common/CartButton";
@@ -27,9 +22,7 @@ export default class Dishes extends React.Component {
       },
       headerRight: (
         <CartButton
-        onPress = {() => {
-          navigation.navigate('Cart');
-          }}
+        onPress = {() => {navigation.navigate('Cart');}}
         />
       )
     };
