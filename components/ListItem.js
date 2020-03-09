@@ -9,19 +9,11 @@ import {
 export default class ListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isClicked: false
-    };
   }
-  handleClick = () => {
-    this.setState({
-      isClicked: !this.state.isClicked
-    });
-    this.props.handleNaviagation();
-  };
+
   render() {
     return (
-      <TouchableOpacity onPress={this.handleClick}>
+      <TouchableOpacity onPress={this.props.handleNaviagation}>
         <View
           //elevation={2}
           style={{

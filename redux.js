@@ -18,16 +18,9 @@ export const emptyCart = () => ({
 export const items = (state = {items:[], numOfItems: 0}, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
-            if(state.items.length<1) return {...state, numOfItems: action.item.quantity, items: [action.item]}
-            const items = state.items.reduce((cart,item)=>{
-                if (item.id === action.item.id) {
-                    cart.push({...item, quantity:item.quantity + action.item.quantity})
-                }else{
-                    cart.push(item)
-                }
-                return cart
-            },[])
-            return {...state, numOfItems: state.numOfItems+action.item.quantity, items};
+            // todo only store quantity of 1st item in the item itself - - this is why we use the reduce
+            if(state.items.filter(item => item.id === action.item.id).length !== 0) return {...state, numOfItems: state.numOfItems+action.item.quantity }
+            return {...state, numOfItems: state.numOfItems+action.item.quantity, items: [...state.items,action.item] }
         case 'EMPTY_CART':
             return {...state, numOfItems:0, items:[]};
         default:
@@ -35,8 +28,22 @@ export const items = (state = {items:[], numOfItems: 0}, action) => {
     }
 };
 
+export const selectRestaurant = restaurant => ({
+    type: 'SELECT_RESTAURANT',
+    restaurant,
+});
+
+export const restaurantDetails = (state={name: null}, action ) => {
+    switch (action.type) {
+        case 'SELECT_RESTAURANT':
+            return {...state, name: action.restaurant.name}
+        default:
+            return state
+    }
+}
 export const reducers = combineReducers({
-    items
+    items,
+    restaurantDetails
 });
 
 export function configureStore(initialState = {}) {

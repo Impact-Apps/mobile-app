@@ -8,49 +8,44 @@ import {
 import restaurantsData from "../api/restaurants.json";
 import RestaurantItem from "./RestaurantItem";
 import CartButton from "./common/CartButton";
+import {connect} from "react-redux";
+import { selectRestaurant} from '../redux';
 
-export default class Restaurants extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: "Restaurants",
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0
-      },
-      headerRight: (
-        <CartButton
-          onPress={() => { navigation.navigate('Cart');}}
-        />
-      )
-    };
-  };
-  handleNaviagation = () => {
-    this.props.navigation.navigate("Dishes");
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={restaurantsData}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <RestaurantItem
-              name={item.name}
-              image={item.image}
-              cuisine={item.cuisine}
-              location={item.location}
-              isVegetarian={item.isVegetarian}
-              handleNaviagation={this.handleNaviagation}
-            />
-          )}
-        />
-      </View>
-    );
+const mapDtoP = (dispatch) =>{
+  return {
+    selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant))
   }
 }
+
+const Restaurants = (props) => {
+  const handleNavigation = (restaurant) => {
+    props.selectRestaurant(restaurant)
+    props.navigation.navigate("Dishes");
+  };
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={restaurantsData}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <RestaurantItem
+            name={item.name}
+            image={item.image}
+            cuisine={item.cuisine}
+            location={item.location}
+            isVegetarian={item.isVegetarian}
+            handleNaviagation={() => handleNavigation(item)}
+          />
+        )}
+      />
+    </View>
+  );
+
+}
+const ConnectedRestaurants = connect(null, mapDtoP)(Restaurants);
+
+export default ConnectedRestaurants;
 
 const styles = StyleSheet.create({
   container: {

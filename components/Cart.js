@@ -24,36 +24,37 @@ const mapStateToProps = (state) =>{
 
 
 const Cart = (props) => {
-    console.log(props.items.length)
+    console.log(props)
     return props.items.length === 0 ? (<EmptyCart/>) :
         (<View style={styles.container}>
-        <View>
-            <Text
-                style={{
-                    textAlign: "center",
-                    color: "#ef6136",
-                    fontSize: 18,
-                    opacity: 0.55
-                }}
-            >
+            {/*<Text*/}
+            {/*    style={{*/}
+            {/*        textAlign: "center",*/}
+            {/*        color: "#ef6136",*/}
+            {/*        fontSize: 18,*/}
+            {/*        opacity: 0.55*/}
+            {/*    }}*/}
+            {/*>*/}
                 <FlatList
                     data={props.items}
                     keyExtractor={item => item.id}
-                    renderItem={({item}) => (
-                        <ListItem
-                            name={item.name}
-                            image={item.image}
-                            cuisine={item.cuisine}
-                            price={item.price}
-                            label={item.label}
-                            isVegetarian={item.isVegetarian}
-                            handleNaviagation={() => console.log('clicked')}
-                        />
-                    )}
+                    renderItem={({item}) => {
+                        console.log(item.name)
+                        return(
+                            <ListItem
+                                name={item.name}
+                                image={item.image}
+                                cuisine={item.cuisine}
+                                price={item.price}
+                                label={item.label}
+                                isVegetarian={item.isVegetarian}
+                                handleNaviagation={() => console.log('clicked')}
+                            />
+                        )
+                    }}
                 />
-                <button onClick={() => this.props.emptyCart()}>Empty Cart</button>
-            </Text>
-        </View>
+                <button onClick={() => props.navigation.pop(2)}>button</button>
+            {/*</Text>*/}
     </View>)
 }
 
@@ -63,12 +64,9 @@ export default ConnectedCart;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
         width: "100%",
-        height: "100%",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        marginTop: 8,
+        marginBottom: 8
     },
 
     title: {
