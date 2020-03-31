@@ -9,7 +9,8 @@ const screenWidth = Dimensions.get('window').width;
 const BASE_URL = Config.NGROK_HTTPS_URL;
 
 const ItemCard = ({item, qty, qtyChanged, addToCart}) => {
-  const {image, price, name} = item;
+const {id, image, price, name} = item;
+
 
   const restaurant = {
       name: 'Rest Name'

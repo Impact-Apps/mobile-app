@@ -1,29 +1,19 @@
 import React from "react";
 import {
-  StyleSheet,
   Text,
   View,
   Image,
-  Button,
   TouchableOpacity
 } from "react-native";
 
 export default class ListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isClicked: false
-    };
   }
-  handleClick = () => {
-    this.setState({
-      isClicked: !this.state.isClicked
-    });
-    this.props.handleNaviagation();
-  };
+
   render() {
     return (
-      <TouchableOpacity onPress={this.handleClick}>
+      <TouchableOpacity onPress={this.props.handleNaviagation}>
         <View
           //elevation={2}
           style={{
@@ -107,18 +97,6 @@ export default class ListItem extends React.Component {
               >
                 {this.props.price}
               </Text>
-              {/* <Button
-                onPress={e => alert("Hey")}
-                title="ADD"
-                style={{
-                  backgroundColor: "4099ff",
-                  color: "#fff",
-                  paddingLeft: 16,
-                  paddingRight: 16,
-                  paddingTop: 8,
-                  paddingBottom: 8
-                }}
-              /> */}
             </View>
           </View>
         </View>

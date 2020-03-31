@@ -1,58 +1,68 @@
-import React from "react";
+import React, { useEffect} from "react";
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
-  Image,
-  TouchableOpacity
 } from "react-native";
 import restaurantsData from "../api/restaurants.json";
 import RestaurantItem from "./RestaurantItem";
-import CartButton from "./common/CartButton";
-
-export default class Restaurants extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: "Restaurants",
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0
-      },
-      headerRight: (
-        <CartButton
-          onPress={() => { navigation.navigate('Cart');}}
-        />
-      )
-    };
-  };
-  handleNaviagation = () => {
-    this.props.navigation.navigate("Dishes");
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={restaurantsData}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <RestaurantItem
-              name={item.name}
-              image={item.image}
-              cuisine={item.cuisine}
-              location={item.location}
-              isVegetarian={item.isVegetarian}
-              handleNaviagation={this.handleNaviagation}
-            />
-          )}
-        />
-      </View>
-    );
+import {connect} from "react-redux";
+import { selectRestaurant, fetchRestaurants} from '../redux';
+import axios from 'axios'
+const mapDtoP = (dispatch) =>{
+  return {
+    selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant)),
+    fetchRestaurants: restaurants => dispatch(fetchRestaurants(restaurants))
   }
 }
+
+const mapStateToProps = (state) =>{
+  return {
+    restaurants: state.restaurantDetails.restaurants
+  }
+}
+
+const Restaurants = (props) => {
+
+  useEffect(  () =>  {
+    const fetchRestaurant =  async () => {
+      const response =  await axios.get('http://localhost:3003/api/restaurant')
+      console.log(response.data)
+      props.fetchRestaurants(response.data)
+    }
+    fetchRestaurant()
+  },[])
+
+
+
+  const handleNavigation = (restaurant) => {
+    props.selectRestaurant(restaurant)
+    props.navigation.navigate("Dishes");
+  };
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={props.restaurants}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => (
+          <RestaurantItem
+            name={item.name}
+            image={item.image}
+            cuisine={item.cuisine}
+            location={item.location}
+            isVegetarian={item.isVegetarian}
+            handleNaviagation={() => handleNavigation(item)}
+          />
+        )}
+      />
+    </View>
+  );
+
+}
+const ConnectedRestaurants = connect(mapStateToProps, mapDtoP)(Restaurants);
+
+export default ConnectedRestaurants;
 
 const styles = StyleSheet.create({
   container: {

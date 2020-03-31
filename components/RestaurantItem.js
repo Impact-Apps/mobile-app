@@ -3,13 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   Image,
-  Button,
   TouchableOpacity
 } from "react-native";
-import CustomText from "../components/common/CustomText";
-import Constants from "../constants/constants";
 
 export default class RestaurantItem extends React.Component {
   constructor(props) {
