@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useEffect} from "react";
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
 } from "react-native";
 import restaurantsData from "../api/restaurants.json";
 import RestaurantItem from "./RestaurantItem";
-import CartButton from "./common/CartButton";
 import {connect} from "react-redux";
-import { selectRestaurant} from '../redux';
-
+import { selectRestaurant, fetchRestaurants} from '../redux';
+import axios from 'axios'
 const mapDtoP = (dispatch) =>{
   return {
-    selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant))
+    selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant)),
+    fetchRestaurants: restaurants => dispatch(fetchRestaurants(restaurants))
+  }
+}
+
+const mapStateToProps = (state) =>{
+  return {
+    restaurants: state.restaurantDetails.restaurants
   }
 }
 
 const Restaurants = (props) => {
+
+  useEffect(  () =>  {
+    const fetchRestaurant =  async () => {
+      const response =  await axios.get('http://localhost:3003/api/restaurant')
+      console.log(response.data)
+      props.fetchRestaurants(response.data)
+    }
+    fetchRestaurant()
+  },[])
+
+
+
   const handleNavigation = (restaurant) => {
     props.selectRestaurant(restaurant)
     props.navigation.navigate("Dishes");
@@ -26,8 +43,8 @@ const Restaurants = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={restaurantsData}
-        keyExtractor={item => item.id}
+        data={props.restaurants}
+        keyExtractor={item => item._id}
         renderItem={({ item }) => (
           <RestaurantItem
             name={item.name}
@@ -43,7 +60,7 @@ const Restaurants = (props) => {
   );
 
 }
-const ConnectedRestaurants = connect(null, mapDtoP)(Restaurants);
+const ConnectedRestaurants = connect(mapStateToProps, mapDtoP)(Restaurants);
 
 export default ConnectedRestaurants;
 

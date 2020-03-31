@@ -53,6 +53,8 @@ class ItemDetails extends React.Component {
       `${qty} ${item.name} was added to the basket.`,
     );
     this.props.addToCart({...item, quantity: qty});
+    const {navigation} = this.props;
+    navigation.goBack();
   };
 
   render() {

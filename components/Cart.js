@@ -27,14 +27,6 @@ const Cart = (props) => {
     console.log(props)
     return props.items.length === 0 ? (<EmptyCart/>) :
         (<View style={styles.container}>
-            {/*<Text*/}
-            {/*    style={{*/}
-            {/*        textAlign: "center",*/}
-            {/*        color: "#ef6136",*/}
-            {/*        fontSize: 18,*/}
-            {/*        opacity: 0.55*/}
-            {/*    }}*/}
-            {/*>*/}
                 <FlatList
                     data={props.items}
                     keyExtractor={item => item.id}
@@ -54,7 +46,6 @@ const Cart = (props) => {
                     }}
                 />
                 <button onClick={() => props.navigation.pop(2)}>button</button>
-            {/*</Text>*/}
     </View>)
 }
 
