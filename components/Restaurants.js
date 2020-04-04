@@ -37,7 +37,7 @@ const Restaurants = (props) => {
 
   const handleNavigation = (restaurant) => {
     props.selectRestaurant(restaurant)
-    props.navigation.navigate("Dishes");
+    props.navigation.navigate("Items");
   };
 
   return (

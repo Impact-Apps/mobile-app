@@ -18,17 +18,17 @@ const mapDispatchtoProps = (dispatch) =>{
 }
 const mapStateToProps = (state) =>{
   return {
-    items: state.items.items
+    cart: state.cart.items
   }
 }
 
 
 const Cart = (props) => {
     console.log(props)
-    return props.items.length === 0 ? (<EmptyCart/>) :
+    return props.cart.length === 0 ? (<EmptyCart/>) :
         (<View style={styles.container}>
                 <FlatList
-                    data={props.items}
+                    data={props.cart}
                     keyExtractor={item => item.id}
                     renderItem={({item}) => {
                         console.log(item.name)

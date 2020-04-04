@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
 import RestaurantsScreen from "./components/Restaurants";
-import DishesScreen from "./components/Dishes";
+import ItemsScreen from "./components/Items";
 import CartScreen from "./components/Cart";
 import EmptyCartScreen from "./components/common/EmptyCart";
 import ItemDetailsScreen from "./components/ItemDetails";
@@ -13,10 +13,10 @@ const RootStack = createStackNavigator({
       title: "Food Shop"
     }
   },
-  Dishes: {
-    screen: DishesScreen,
+  Items: {
+    screen: ItemsScreen,
     navigationOptions: {
-      title: "Dishes"
+      title: "Items"
     }
   },
   Cart: {

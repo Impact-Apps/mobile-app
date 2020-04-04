@@ -4,6 +4,7 @@ import {
     createStore,
 } from 'redux';
 
+// cart
 // actions.js
 export const addToCart = item => ({
     type: 'ADD_TO_CART',
@@ -15,10 +16,9 @@ export const emptyCart = () => ({
 });
 
 // reducers.js
-export const items = (state = {items:[], numOfItems: 0}, action) => {
+export const cart = (state = {items:[], numOfItems: 0}, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
-            // todo only store quantity of 1st item in the item itself - - this is why we use the reduce
             const itemIndex = state.items.findIndex((item)=> item.id ===action.item.id)
             if(itemIndex !== -1) {
                 state.items[itemIndex].quantity +=action.item.quantity
@@ -32,6 +32,7 @@ export const items = (state = {items:[], numOfItems: 0}, action) => {
     }
 };
 
+// restaurants
 export const selectRestaurant = restaurant => ({
     type: 'SELECT_RESTAURANT',
     restaurant,
@@ -42,20 +43,39 @@ export const fetchRestaurants = restaurants => ({
     restaurants
 })
 
-export const restaurantDetails = (state={restaurants:[], name: null}, action ) => {
+export const restaurantDetails = (state={restaurants:[], selectedRestaurant: null}, action ) => {
     // todo - name to restaurantName
     switch (action.type) {
         case 'SELECT_RESTAURANT':
-            return {...state, name: action.restaurant.name}
+            return {...state, selectedRestaurant: action.restaurant}
         case 'FETCH_RESTAURANTS':
             return {...state, restaurants : action.restaurants}
         default:
             return state
     }
 }
+
+// items
+// actions.js
+export const fetchItems = items => ({
+    type: 'FETCH_ITEMS',
+    items
+})
+
+// reducers.js
+export const items = (state = {items:[]}, action) => {
+    switch (action.type) {
+        case 'FETCH_ITEMS':
+            return {...state, items: action.items}
+        default:
+            return state
+    }
+};
+
 export const reducers = combineReducers({
+    cart,
+    restaurantDetails,
     items,
-    restaurantDetails
 });
 
 export function configureStore(initialState = {}) {
