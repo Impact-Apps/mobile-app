@@ -16,17 +16,17 @@ export const emptyCart = () => ({
 });
 
 // reducers.js
-export const cart = (state = {items:[], numOfItems: 0}, action) => {
+export const cart = (state = {items:[]}, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
-            const itemIndex = state.items.findIndex((item)=> item.id ===action.item.id)
+            const itemIndex = state.items.findIndex((item)=> item._id ===action.item._id)
             if(itemIndex !== -1) {
-                state.items[itemIndex].quantity +=action.item.quantity
-                return {...state, numOfItems: state.numOfItems+action.item.quantity }
+                state.items[itemIndex].quantity = action.item.quantity
+                return {...state}
             }
-            return {...state, numOfItems: state.numOfItems+action.item.quantity, items: [...state.items,action.item] }
+            return {...state, items: [...state.items,action.item] }
         case 'EMPTY_CART':
-            return {...state, numOfItems:0, items:[]};
+            return {...state, items:[]};
         default:
             return state;
     }

@@ -8,13 +8,9 @@ const screenWidth = Dimensions.get('window').width;
 
 const BASE_URL = Config.NGROK_HTTPS_URL;
 
-const ItemCard = ({item, qty, qtyChanged, addToCart}) => {
+const ItemCard = ({item, qty, qtyChanged, addToCart, restaurantName}) => {
 const {id, image, price, name} = item;
 
-
-  const restaurant = {
-      name: 'Rest Name'
-  }
   return (
     <View style={styles.wrapper}>
       <Image
@@ -27,11 +23,11 @@ const {id, image, price, name} = item;
       </View>
 
       <View style={styles.smallItemContainer}>
-        <Text style={styles.subText}>by {restaurant.name}</Text>
+        <Text style={styles.subText}>by {restaurantName}</Text>
       </View>
 
       <View style={styles.itemContainer}>
-        <Text style={styles.priceText}>${price}</Text>
+        <Text style={styles.priceText}>€{price}</Text>
       </View>
 
       <View style={styles.smallItemContainer}>
@@ -41,7 +37,7 @@ const {id, image, price, name} = item;
       <View style={styles.itemContainer}>
         <SimpleStepper
           valueChanged={value => qtyChanged(value)}
-          initialValue={1}
+          initialValue={qty}
           minimumValue={1}
           maximumValue={10}
           showText={true}

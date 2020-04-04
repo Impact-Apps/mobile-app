@@ -16,7 +16,8 @@ const RootStack = createStackNavigator({
   Items: {
     screen: ItemsScreen,
     navigationOptions: {
-      title: "Items"
+      title: "Items",
+      headerBackTitle: 'Menu'
     }
   },
   Cart: {

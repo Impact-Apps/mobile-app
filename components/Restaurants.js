@@ -27,7 +27,6 @@ const Restaurants = (props) => {
   useEffect(  () =>  {
     const fetchRestaurant =  async () => {
       const response =  await axios.get('http://localhost:3003/api/restaurant')
-      console.log(response.data)
       props.fetchRestaurants(response.data)
     }
     fetchRestaurant()

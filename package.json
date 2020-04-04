@@ -36,7 +36,8 @@
     "react-redux": "^7.2.0",
     "react-simple-stepper": "^1.0.1",
     "redux": "^4.0.5",
-    "axios": "0.19.2"
+    "axios": "0.19.2",
+    "lodash": "4.17.15"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

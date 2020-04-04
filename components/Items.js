@@ -29,9 +29,9 @@ const Items = (props) => {
 
   useEffect( () =>  {
     const fetchItems =  async () => {
-      const response =  await axios.get(`http://localhost:3003/api/menu/${props.selectedRestaurant._id}/items`) // api/menu/id
-      console.log(response.data)
+      const response =  await axios.get(`http://localhost:3003/api/menu/${props.selectedRestaurant._id}/items`)
       props.fetchItems(response.data)
+      props.navigation.setParams({title: `${props.selectedRestaurant.name}'s Menu`})
     }
     fetchItems()
   },[])
@@ -41,7 +41,6 @@ const Items = (props) => {
   };
   return (
     <View style={styles.container}>
-      <Text>{props.selectedRestaurant.name}</Text>
       <FlatList
         data={props.items}
         keyExtractor={item => item._id}
@@ -62,8 +61,9 @@ const Items = (props) => {
 }
 
 Items.navigationOptions = (props) => {
+    const headerTitle = props.navigation.getParam('title')
     return {
-        headerTitle: "Menu",
+        headerTitle,
         headerStyle: {
             elevation: 0,
             shadowOpacity: 0

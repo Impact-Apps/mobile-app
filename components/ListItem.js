@@ -95,8 +95,9 @@ export default class ListItem extends React.Component {
                   color: "#ef6136"
                 }}
               >
-                {this.props.price}
+                {`€ ${this.props.price}`}
               </Text>
+
             </View>
           </View>
         </View>
