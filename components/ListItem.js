@@ -99,6 +99,28 @@ export default class ListItem extends React.Component {
               </Text>
 
             </View>
+            { this.props.cartQuantity ? <View
+                  style={{
+                      height: 20,
+                      width: 20,
+                      borderRadius: 10,
+                      backgroundColor: '#ef6136',
+                      position: 'absolute',
+                      right: 8,
+                      top: 2
+                  }}
+              >
+                  <Text
+                      style={{
+                          color: '#fff',
+                          fontSize: 13,
+                          textAlign: 'center',
+                          lineHeight: 20
+                      }}
+                  >
+                      {this.props.cartQuantity}
+                  </Text>
+              </View> : null}
           </View>
         </View>
       </TouchableOpacity>

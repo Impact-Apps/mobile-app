@@ -11,15 +11,21 @@ export const addToCart = item => ({
     item,
 });
 
+export const removeItemFromCart = item => ({
+    type: 'REMOVE_ITEM_FROM_CART',
+    item,
+});
+
 export const emptyCart = () => ({
     type: 'EMPTY_CART'
 });
 
 // reducers.js
 export const cart = (state = {items:[]}, action) => {
+    let itemIndex;
     switch (action.type) {
         case 'ADD_TO_CART':
-            const itemIndex = state.items.findIndex((item)=> item._id ===action.item._id)
+            itemIndex = state.items.findIndex((item)=> item._id ===action.item._id)
             if(itemIndex !== -1) {
                 state.items[itemIndex].quantity = action.item.quantity
                 return {...state}
@@ -27,6 +33,9 @@ export const cart = (state = {items:[]}, action) => {
             return {...state, items: [...state.items,action.item] }
         case 'EMPTY_CART':
             return {...state, items:[]};
+        case 'REMOVE_ITEM_FROM_CART':
+            itemIndex = state.items.findIndex((item)=> item._id === action.item._id)
+            return {...state, items: state.items.filter(item => item._id !== action.item_id)}
         default:
             return state;
     }

@@ -11,6 +11,8 @@ import ListItem from "./ListItem";
 import CartButton from "./common/CartButton";
 import {connect} from "react-redux";
 import { fetchItems } from '../redux';
+import { get } from 'lodash';
+import ConnectedItemDetails from "./ItemDetails";
 
 const mapDispatchToProps = (dispatch) =>{
   return {
@@ -21,7 +23,7 @@ const mapDispatchToProps = (dispatch) =>{
 const mapStateToProps = (state) =>{
   return {
     selectedRestaurant: state.restaurantDetails.selectedRestaurant, // restaurant menuID
-    items: state.items.items
+    items: state.items.items.map(item => ({...item, cartQuantity: get(state.cart.items.find(cartItem => cartItem._id === item._id), 'quantity', 0)})),
   }
 }
 
@@ -41,7 +43,7 @@ const Items = (props) => {
   };
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlatList // Might have to get rid of this 
         data={props.items}
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
@@ -53,6 +55,7 @@ const Items = (props) => {
             label={item.label}
             isVegetarian={item.isVegetarian}
             handleNaviagation={() => handleNavigation(item)}
+            cartQuantity={item.cartQuantity}
           />
         )}
       />

@@ -9,6 +9,7 @@ import EmptyCart from "./common/EmptyCart";
 import {connect} from "react-redux";
 import {addToCart, emptyCart} from "../redux";
 import CartItem from "./CartItem";
+import { HeaderBackButton } from 'react-navigation';
 
 const mapDispatchToProps = (dispatch) =>{
   return {
@@ -54,9 +55,14 @@ const Cart = (props) => {
             >
                 {`Total: ${total}`}
             </Text>
-                <button onClick={() => props.navigation.pop(2)}>button</button>
     </View>)
 }
+
+Cart.navigationOptions = ({ navigation }) => {
+    return{
+        headerLeft:(<HeaderBackButton title='Menu' onPress={()=>{ navigation.navigate('Items') }}/>),
+    };
+};
 
 const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)
 

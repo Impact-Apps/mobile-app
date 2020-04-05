@@ -3,12 +3,13 @@ import {Alert} from 'react-native';
 import CartButton from "./common/CartButton";
 import ItemCard from './ItemCard';
 import { connect } from 'react-redux';
-import { addToCart } from '../redux';
+import { addToCart, removeItemFromCart } from '../redux';
 import { get } from 'lodash'
 
 const mapDispatchToProps = (dispatch) =>{
   return {
-    addToCart: item => dispatch(addToCart(item))
+    addToCart: item => dispatch(addToCart(item)),
+    removeItemFromCart: item => dispatch(removeItemFromCart(item))
   }
 }
 
@@ -38,7 +39,9 @@ class ItemDetails extends React.Component {
 
 
   state = {
-    qty: get(this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id), 'quantity',1)
+    qty: get(this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id), 'quantity', 1),
+    inCart: !!this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id),
+    startQuantity: get(this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id), 'quantity', 0)
   };
 
 
@@ -54,9 +57,6 @@ class ItemDetails extends React.Component {
   };
 
   addToCart = (item, qty) => {
-    console.log('added to cart', 
-      'Added to basket',
-      `${qty} ${item.name} was added to the basket.`)
     Alert.alert(
       'Added to basket',
       `${qty} ${item.name} was added to the basket.`,
@@ -66,8 +66,17 @@ class ItemDetails extends React.Component {
     navigation.goBack();
   };
 
+  removeFromCart = (item) => {
+    Alert.alert(
+      `Removed ${item.name} from basket`,
+    );
+    this.props.removeItemFromCart(item);
+    const {navigation} = this.props;
+    navigation.goBack();
+  };
+
   render() {
-    const {qty} = this.state;
+    const {qty, inCart, startQuantity} = this.state;
     return (
       <ItemCard
 
@@ -75,7 +84,10 @@ class ItemDetails extends React.Component {
         item={this.item}
         qty={qty}
         qtyChanged={this.qtyChanged}
+        removeFromCart={this.removeFromCart}
         addToCart={this.addToCart}
+        inCart={inCart}
+        startQuantity={startQuantity}
       />
     );
   }

@@ -10,7 +10,8 @@ const RootStack = createStackNavigator({
   Restaurants: {
     screen: RestaurantsScreen,
     navigationOptions: {
-      title: "Food Shop"
+      title: "Food Shop",
+      headerBackTitle: 'Restaurants'
     }
   },
   Items: {

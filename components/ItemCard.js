@@ -8,9 +8,14 @@ const screenWidth = Dimensions.get('window').width;
 
 const BASE_URL = Config.NGROK_HTTPS_URL;
 
-const ItemCard = ({item, qty, qtyChanged, addToCart, restaurantName}) => {
-const {id, image, price, name} = item;
-
+const ItemCard = ({item, qty, qtyChanged, addToCart, restaurantName, inCart, startQuantity, removeFromCart}) => {
+const {image, price, name} = item;
+const buttonDisabled = inCart && qty === startQuantity
+const buttonText = () => {
+  if(!inCart) return 'Add to Basket'
+  if(buttonDisabled) return 'Ok'
+  return 'Update Basket'
+}
   return (
     <View style={styles.wrapper}>
       <Image
@@ -50,13 +55,23 @@ const {id, image, price, name} = item;
 
       <View style={styles.itemContainer}>
         <Button
+          disabled={buttonDisabled}
           onPress={() => {
             addToCart(item, qty);
           }}
-          title="Add to Basket"
+          title={buttonText()}
           color="#c53c3c"
         />
       </View>
+      { inCart ? <View style={styles.itemContainer}>
+        <Button
+          onPress={() => {
+            removeFromCart(item);
+          }}
+          title="Remove Item From Cart"
+          color="#c53c3c"
+        />
+      </View> : null}
     </View>
   );
 };
