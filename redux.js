@@ -34,8 +34,7 @@ export const cart = (state = {items:[]}, action) => {
         case 'EMPTY_CART':
             return {...state, items:[]};
         case 'REMOVE_ITEM_FROM_CART':
-            itemIndex = state.items.findIndex((item)=> item._id === action.item._id)
-            return {...state, items: state.items.filter(item => item._id !== action.item_id)}
+            return {...state, items: state.items.filter(item => item._id !== action.item._id)}
         default:
             return state;
     }
