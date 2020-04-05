@@ -3,7 +3,7 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity, StyleSheet
+    TouchableOpacity, StyleSheet, Button
 } from "react-native";
 import {SimpleStepper} from "react-native-simple-stepper";
 
@@ -128,6 +128,15 @@ export default class CartItem extends React.Component {
                                 incrementImageStyle={StyleSheet.flatten(styles.stepperButton)}
                                 decrementImageStyle={StyleSheet.flatten(styles.stepperButton)}
                                 textStyle={StyleSheet.flatten(styles.stepperText)}
+                            />
+                        </View>
+                        <View style={styles.itemContainer}>
+                            <Button
+                                onPress={() => {
+                                    this.props.removeFromCart()
+                                }}
+                                title="Remove Item From Cart"
+                                color="#c53c3c"
                             />
                         </View>
                     </View>

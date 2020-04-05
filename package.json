@@ -37,7 +37,8 @@
     "react-simple-stepper": "^1.0.1",
     "redux": "^4.0.5",
     "axios": "0.19.2",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "react-device-detect": "1.11.14"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

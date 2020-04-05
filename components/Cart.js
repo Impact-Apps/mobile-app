@@ -1,20 +1,23 @@
 import React, { useEffect} from "react";
 import {
-  StyleSheet,
-  Text,
-  View
+    Alert, Button, Modal,
+    StyleSheet,
+    Text,
+    View
 } from "react-native";
 import { round } from 'lodash'
 import EmptyCart from "./common/EmptyCart";
 import {connect} from "react-redux";
-import {addToCart, emptyCart} from "../redux";
+import {addToCart, emptyCart, removeItemFromCart} from "../redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
-
+import {isMobile} from 'react-device-detect';
 const mapDispatchToProps = (dispatch) =>{
   return {
     emptyCart: () => dispatch(emptyCart()),
-    addToCart: item => dispatch(addToCart(item))
+    addToCart: item => dispatch(addToCart(item)),
+    removeItemFromCart: item => dispatch(removeItemFromCart(item))
+
   }
 }
 const mapStateToProps = (state) =>{
@@ -25,7 +28,15 @@ const mapStateToProps = (state) =>{
 }
 
 
+
 const Cart = (props) => {
+    const promptEmptyBasket =() =>{
+        state.isModalVisible = true
+    }
+
+    const state ={
+        isModalVisible: false
+    }
 
     let total = props.totalPrice
     return props.cart.length === 0 ? (<EmptyCart/>) :
@@ -44,6 +55,7 @@ const Cart = (props) => {
                     qtyChanged={(quantity)=>{
                         props.addToCart({...item, quantity})
                     }}
+                    removeFromCart={()=>props.removeItemFromCart(item)}
                 />
             ))}
             <Text
@@ -55,6 +67,31 @@ const Cart = (props) => {
             >
                 {`Total: ${total}`}
             </Text>
+            <View style={styles.itemContainer}>
+                <Button
+                    onPress={() => {
+                        if(isMobile) {
+                            Alert.alert(
+                                'Empty Cart',
+                                'Are you sure you want to empty your cart?',
+                                [
+                                    {text: 'Empty', onPress: props.emptyCart},
+                                    {
+                                        text: 'Cancel',
+                                        onPress: () => console.log('Cancel Pressed'),
+                                        style: 'cancel',
+                                    }
+                                ]
+                            );
+                        }
+                        else{
+                            props.emptyCart()
+                        }
+                    }}
+                    title="Empty cart"
+                    color="#c53c3c"
+                />
+            </View>
     </View>)
 }
 
@@ -73,6 +110,9 @@ const styles = StyleSheet.create({
         width: "100%",
         marginTop: 8,
         marginBottom: 8
+    },
+    itemContainer: {
+        marginBottom: 20,
     },
 
     title: {
