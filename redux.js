@@ -3,6 +3,7 @@ import {
     combineReducers,
     createStore,
 } from 'redux';
+import { AppState } from 'react-native';
 
 // cart
 // actions.js
@@ -80,10 +81,26 @@ export const items = (state = {items:[]}, action) => {
     }
 };
 
+// order
+export const createOrder = order => ({
+    type: 'CREATE_ORDER',
+    order,
+});
+
+export const order = (state={}, action ) => {
+    switch (action.type) {
+        case 'CREATE_ORDER':
+            return  action.order
+        default:
+            return state
+    }
+}
+
 export const reducers = combineReducers({
     cart,
     restaurantDetails,
     items,
+    order,
 });
 
 export function configureStore(initialState = {}) {

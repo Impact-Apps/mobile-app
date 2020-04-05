@@ -5,6 +5,7 @@ import ItemsScreen from "./components/Items";
 import CartScreen from "./components/Cart";
 import EmptyCartScreen from "./components/common/EmptyCart";
 import ItemDetailsScreen from "./components/ItemDetails";
+import CheckoutScreen from "./components/Checkout";
 
 const RootStack = createStackNavigator({
   Restaurants: {
@@ -46,6 +47,12 @@ const RootStack = createStackNavigator({
     screen: ItemDetailsScreen,
     navigationOptions: {
       title: "Item Details",
+    }
+  },
+  Checkout: {
+    screen: CheckoutScreen,
+    navigationOptions: {
+      title: "Checkout",
     }
   }
 });

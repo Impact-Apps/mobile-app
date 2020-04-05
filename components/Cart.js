@@ -1,14 +1,15 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Alert, Button, Modal,
     StyleSheet,
     Text,
-    View
+    View,
+    Picker,
 } from "react-native";
 import { round } from 'lodash'
 import EmptyCart from "./common/EmptyCart";
 import {connect} from "react-redux";
-import {addToCart, emptyCart, removeItemFromCart} from "../redux";
+import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
 import {isMobile} from 'react-device-detect';
@@ -16,28 +17,22 @@ const mapDispatchToProps = (dispatch) =>{
   return {
     emptyCart: () => dispatch(emptyCart()),
     addToCart: item => dispatch(addToCart(item)),
-    removeItemFromCart: item => dispatch(removeItemFromCart(item))
-
+    removeItemFromCart: item => dispatch(removeItemFromCart(item)),
+    createOrder: (order) => dispatch(createOrder(order))
   }
 }
 const mapStateToProps = (state) =>{
   return {
     cart: state.cart.items,
-    totalPrice: round(state.cart.items.reduce((totalPrice,item) => totalPrice + (item.price*item.quantity), 0),2)
+    totalPrice: round(state.cart.items.reduce((totalPrice,item) => totalPrice + (item.price*item.quantity), 0),2),
+    restaurant: state.restaurantDetails.selectedRestaurant
   }
 }
 
 
 
 const Cart = (props) => {
-    const promptEmptyBasket =() =>{
-        state.isModalVisible = true
-    }
-
-    const state ={
-        isModalVisible: false
-    }
-
+    const [selectedValue, setSelectedValue] = useState("Collection");
     let total = props.totalPrice
     return props.cart.length === 0 ? (<EmptyCart/>) :
         (<View style={styles.container}>
@@ -89,6 +84,26 @@ const Cart = (props) => {
                         }
                     }}
                     title="Empty cart"
+                    color="#c53c3c"
+                />
+            </View>
+            <View style={styles.itemContainer}>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50, width: 150 }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item key="collection" label="Collection" value="Collection" />
+                    {[1,2,3,4,5].map(table => <Picker.Item key={table} label={`Table Number ${table}`} value={table} />)}
+                </Picker>
+            </View>
+            <View style={styles.itemContainer}>
+                <Button
+                    onPress={() => {
+                        props.createOrder({location: selectedValue, items: props.cart.map(item => ({_id: item._id, quantity: item.quantity, price: item.price, name: item.name})), total, restaurant: props.restaurant})
+                        props.navigation.navigate('Checkout')
+                    }}
+                    title="Checkout"
                     color="#c53c3c"
                 />
             </View>
