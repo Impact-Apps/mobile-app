@@ -6,7 +6,6 @@ import {
     FlatList,
     Text, Alert
 } from "react-native";
-// import foodData from "../food-data.json";
 import ListItem from "./ListItem";
 import CartButton from "./common/CartButton";
 import {connect} from "react-redux";
@@ -14,6 +13,7 @@ import {emptyCart, fetchItems} from '../redux';
 import { get } from 'lodash';
 import {HeaderBackButton} from "react-navigation";
 import {isMobile} from 'react-device-detect';
+import { BASE_API_URL } from 'react-native-dotenv'
 
 const mapDispatchToProps = (dispatch) =>{
   return {
@@ -34,7 +34,7 @@ const Items = (props) => {
 
   useEffect( () =>  {
     const fetchItems =  async () => {
-      const response =  await axios.get(`http://localhost:3003/api/menu/${props.selectedRestaurant._id}/items`)
+      const response =  await axios.get(`${BASE_API_URL}/menu/${props.selectedRestaurant._id}/items`)
       props.fetchItems(response.data)
       props.navigation.setParams({title: `${props.selectedRestaurant.name}'s Menu`})
       props.navigation.setParams({isCartEmpty: props.isCartEmpty})
