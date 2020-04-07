@@ -12,14 +12,16 @@ const RootStack = createStackNavigator({
     screen: RestaurantsScreen,
     navigationOptions: {
       title: "Food Shop",
-      headerBackTitle: 'Restaurants'
+      headerBackTitle: 'Restaurants',
+      gesturesEnabled: false,
     }
   },
   Items: {
     screen: ItemsScreen,
     navigationOptions: {
       title: "Items",
-      headerBackTitle: 'Menu'
+      headerBackTitle: 'Menu',
+      gesturesEnabled: false,
     }
   },
   Cart: {
@@ -29,7 +31,8 @@ const RootStack = createStackNavigator({
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0
-      }
+      },
+      gesturesEnabled: false,
     }
   },
 
@@ -40,19 +43,22 @@ const RootStack = createStackNavigator({
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0
-      }
+      },
+      gesturesEnabled: false,
     }
   },
   ItemDetails: {
     screen: ItemDetailsScreen,
     navigationOptions: {
       title: "Item Details",
+      gesturesEnabled: false,
     }
   },
   Checkout: {
     screen: CheckoutScreen,
     navigationOptions: {
       title: "Checkout",
+      gesturesEnabled: false,
     }
   }
 });

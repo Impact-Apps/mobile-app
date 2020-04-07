@@ -3,11 +3,12 @@ import {
     Button,
     StyleSheet,
     Text,
-    Table,
-
     View,
 } from "react-native";
+import axios from 'axios';
 import {connect} from "react-redux";
+import { BASE_API_URL } from 'react-native-dotenv'
+import { emptyCart } from "../redux";
 
 
 const mapStateToProps = (state) =>{
@@ -16,6 +17,21 @@ const mapStateToProps = (state) =>{
   }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+    return {
+      emptyCart: () => dispatch(emptyCart()),
+    }
+  }
+
+const postOrder = async (order) => {
+    const orderObject = {
+        restaurantId: order.restaurant._id,
+        items: order.items,
+        location: order.location,
+        total: order.total,
+    }
+    await axios.post(`${BASE_API_URL}/order/`, orderObject)
+}
 
 
 const Checkout = (props) => {
@@ -44,14 +60,17 @@ const Checkout = (props) => {
                   fontWeight: "bold",
                   color: "#ef6136"
                 }}>{props.order.location}</Text>
-            <Button title="Pay Now" onPress={ () => console.log('Pay')}></Button>
+            <Button title="Pay Now" onPress={ () => {
+                postOrder(props.order)
+                props.navigation.navigate('Items')
+                console.log(props.navigation)
+                props.emptyCart()
+            }}></Button>
         </View>
     )
 }
 
-
-
-const ConnectedCheckout = connect(mapStateToProps, null)(Checkout)
+const ConnectedCheckout = connect(mapStateToProps, mapDispatchToProps)(Checkout)
 
 export default ConnectedCheckout;
 
