@@ -4,11 +4,11 @@ import {
   View,
   FlatList,
 } from "react-native";
-import restaurantsData from "../api/restaurants.json";
 import RestaurantItem from "./RestaurantItem";
 import {connect} from "react-redux";
 import { selectRestaurant, fetchRestaurants} from '../redux';
 import axios from 'axios'
+import { BASE_API_URL } from 'react-native-dotenv'
 const mapDtoP = (dispatch) =>{
   return {
     selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant)),
@@ -26,8 +26,7 @@ const Restaurants = (props) => {
 
   useEffect(  () =>  {
     const fetchRestaurant =  async () => {
-      const response =  await axios.get('http://localhost:3003/api/restaurant')
-      console.log(response.data)
+      const response =  await axios.get(`${BASE_API_URL}/restaurant`)
       props.fetchRestaurants(response.data)
     }
     fetchRestaurant()
@@ -37,7 +36,7 @@ const Restaurants = (props) => {
 
   const handleNavigation = (restaurant) => {
     props.selectRestaurant(restaurant)
-    props.navigation.navigate("Dishes");
+    props.navigation.navigate("Items");
   };
 
   return (

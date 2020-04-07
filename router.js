@@ -1,22 +1,25 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
 import RestaurantsScreen from "./components/Restaurants";
-import DishesScreen from "./components/Dishes";
+import ItemsScreen from "./components/Items";
 import CartScreen from "./components/Cart";
 import EmptyCartScreen from "./components/common/EmptyCart";
 import ItemDetailsScreen from "./components/ItemDetails";
+import CheckoutScreen from "./components/Checkout";
 
 const RootStack = createStackNavigator({
   Restaurants: {
     screen: RestaurantsScreen,
     navigationOptions: {
-      title: "Food Shop"
+      title: "Food Shop",
+      headerBackTitle: 'Restaurants'
     }
   },
-  Dishes: {
-    screen: DishesScreen,
+  Items: {
+    screen: ItemsScreen,
     navigationOptions: {
-      title: "Dishes"
+      title: "Items",
+      headerBackTitle: 'Menu'
     }
   },
   Cart: {
@@ -44,6 +47,12 @@ const RootStack = createStackNavigator({
     screen: ItemDetailsScreen,
     navigationOptions: {
       title: "Item Details",
+    }
+  },
+  Checkout: {
+    screen: CheckoutScreen,
+    navigationOptions: {
+      title: "Checkout",
     }
   }
 });
