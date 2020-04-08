@@ -80,6 +80,7 @@ const Cart = (props) => {
                             );
                         }
                         else{
+                            console.log('Cart Emptied')
                             props.emptyCart()
                         }
                     }}
