@@ -26,9 +26,7 @@ const mapDispatchToProps = (dispatch) =>{
 const postOrder = async (order) => {
     const orderObject = {
         restaurantId: order.restaurant._id,
-        items: order.items,
-        location: order.location,
-        total: order.total,
+        ...order
     }
     await axios.post(`${BASE_API_URL}/order/`, orderObject)
 }

@@ -100,7 +100,7 @@ const Cart = (props) => {
             <View style={styles.itemContainer}>
                 <Button
                     onPress={() => {
-                        props.createOrder({location: selectedValue, items: props.cart.map(item => ({_id: item._id, quantity: item.quantity, price: item.price, name: item.name})), total, restaurant: props.restaurant})
+                        props.createOrder({location: selectedValue, items: props.cart.map(item => ({itemId: item._id, quantity: item.quantity, price: item.price, name: item.name})), total, restaurant: props.restaurant, status: "pending"})
                         props.navigation.navigate('Checkout')
                     }}
                     title="Checkout"
