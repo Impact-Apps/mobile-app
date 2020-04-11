@@ -8,7 +8,9 @@ import {
 import axios from 'axios';
 import {connect} from "react-redux";
 import { BASE_API_URL } from 'react-native-dotenv'
-import { emptyCart } from "../redux";
+import { emptyCart, resetOrder } from "../../redux";
+import {getActiveOrders} from "../../orders-store";
+import {fetchOrders} from "../update-components/Updates";
 
 
 const mapStateToProps = (state) =>{
@@ -19,21 +21,32 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-      emptyCart: () => dispatch(emptyCart()),
+        emptyCart: () => dispatch(emptyCart()),
+        getActiveOrders: orders => dispatch(getActiveOrders(orders))
+
     }
   }
 
 const postOrder = async (order) => {
     const orderObject = {
         restaurantId: order.restaurant._id,
-        ...order
+        ...order,
+        userId: 123
     }
     await axios.post(`${BASE_API_URL}/order/`, orderObject)
 }
 
 
 const Checkout = (props) => {
-    
+
+        async function payNow() {
+            await postOrder(props.order)
+            props.emptyCart()
+            props.navigation.navigate('Items')
+            const response = await fetchOrders(props)
+            props.getActiveOrders(response)
+        }
+
     return (
         <View style={styles.container}>
             <Text style={{
@@ -58,12 +71,8 @@ const Checkout = (props) => {
                   fontWeight: "bold",
                   color: "#ef6136"
                 }}>{props.order.location}</Text>
-            <Button title="Pay Now" onPress={ () => {
-                postOrder(props.order)
-                props.navigation.navigate('Items')
-                console.log(props.navigation)
-                props.emptyCart()
-            }}></Button>
+            <Button title="Pay Now" onPress={ async () => {await payNow()}}/>
+
         </View>
     )
 }

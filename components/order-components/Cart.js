@@ -7,9 +7,9 @@ import {
     Picker,
 } from "react-native";
 import { round } from 'lodash'
-import EmptyCart from "./common/EmptyCart";
+import EmptyCart from "../common/EmptyCart";
 import {connect} from "react-redux";
-import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../redux";
+import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
 import {isMobile} from 'react-device-detect';

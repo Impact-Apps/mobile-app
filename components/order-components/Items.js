@@ -7,9 +7,9 @@ import {
     Text, Alert
 } from "react-native";
 import ListItem from "./ListItem";
-import CartButton from "./common/CartButton";
+import CartButton from "../common/CartButton";
 import {connect} from "react-redux";
-import {emptyCart, fetchItems} from '../redux';
+import {emptyCart, fetchItems} from '../../redux';
 import { get } from 'lodash';
 import {HeaderBackButton} from "react-navigation";
 import {isMobile} from 'react-device-detect';

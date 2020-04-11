@@ -1,13 +1,14 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
-import RestaurantsScreen from "./components/Restaurants";
-import ItemsScreen from "./components/Items";
-import CartScreen from "./components/Cart";
+import RestaurantsScreen from "./components/order-components/Restaurants";
+import ItemsScreen from "./components/order-components/Items";
+import CartScreen from "./components/order-components/Cart";
 import EmptyCartScreen from "./components/common/EmptyCart";
-import ItemDetailsScreen from "./components/ItemDetails";
-import CheckoutScreen from "./components/Checkout";
+import ItemDetailsScreen from "./components/order-components/ItemDetails";
+import CheckoutScreen from "./components/order-components/Checkout";
 
-const RootStack = createStackNavigator({
+const OrderStack = createStackNavigator({
+
   Restaurants: {
     screen: RestaurantsScreen,
     navigationOptions: {
@@ -63,4 +64,4 @@ const RootStack = createStackNavigator({
   }
 });
 
-export default RootStack;
+export default OrderStack;

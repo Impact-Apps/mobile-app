@@ -1,9 +1,9 @@
 import React from 'react';
 import {Alert} from 'react-native';
-import CartButton from "./common/CartButton";
+import CartButton from "../common/CartButton";
 import ItemCard from './ItemCard';
 import { connect } from 'react-redux';
-import { addToCart, removeItemFromCart } from '../redux';
+import { addToCart, removeItemFromCart } from '../../redux';
 import { get } from 'lodash'
 
 const mapDispatchToProps = (dispatch) =>{
