@@ -26,6 +26,7 @@ const Restaurants = (props) => {
 
   useEffect(  () =>  {
     const fetchRestaurant =  async () => {
+      console.log(BASE_API_URL)
       const response =  await axios.get(`${BASE_API_URL}/restaurant`)
       props.fetchRestaurants(response.data)
     }

@@ -34,7 +34,8 @@ const Items = (props) => {
 
   useEffect( () =>  {
     const fetchItems =  async () => {
-      const response =  await axios.get(`${BASE_API_URL}/menu/${props.selectedRestaurant._id}/items`)
+        console.log(BASE_API_URL)
+        const response =  await axios.get(`${BASE_API_URL}/menu/${props.selectedRestaurant._id}/items`)
       props.fetchItems(response.data)
       props.navigation.setParams({title: `${props.selectedRestaurant.name}'s Menu`})
       props.navigation.setParams({isCartEmpty: props.isCartEmpty})
@@ -48,7 +49,7 @@ const Items = (props) => {
   };
   return (
     <View style={styles.container}>
-      <FlatList // Might have to get rid of this 
+      <FlatList // Might have to get rid of this
         data={props.items}
         keyExtractor={item => item._id}
         renderItem={({ item }) => {
