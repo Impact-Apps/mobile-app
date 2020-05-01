@@ -4,7 +4,7 @@ export const getActiveOrders = orders => ({
     orders,
 });
 
-export const getOWLOrders = orders => ({
+export const getHistoricalOrders = orders => ({
     type: 'FETCH_HISTORICAL_ORDERS',
     orders,
 });

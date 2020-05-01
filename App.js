@@ -1,12 +1,14 @@
 import React from "react";
 import OrderStack from "./order-router";
+import HistoricalOrdersStack from "./historical-orders-router";
+// import HistoricalOrders from "./components/order-components/HistoricalOrders";
 import { Provider } from 'react-redux';
 import { store } from './redux';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import ConnectedUpdates, {fetchOrders} from "./components/update-components/Updates";
+import ConnectedUpdates from "./components/update-components/Updates";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -45,7 +47,7 @@ class App extends React.Component {
                     />
                     <Tab.Screen
                       name="Past Orders"
-                      component={()=>(<div> History</div>)}
+                      component={() => (<HistoricalOrdersStack />)}
                       options={{
                         tabBarLabel: 'Past Orders',
                         tabBarIcon: ({ color }) => (
