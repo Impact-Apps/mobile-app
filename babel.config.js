@@ -4,7 +4,6 @@ module.exports = function(api) {
     presets: [
       'module:metro-react-native-babel-preset',
       'module:react-native-dotenv',
-      'babel-preset-expo'
     ],
   };
 };

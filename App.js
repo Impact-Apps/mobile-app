@@ -1,17 +1,19 @@
+import 'react-native-gesture-handler';
 import React from "react";
-import OrderStack from "./order-router";
-import HistoricalOrdersStack from "./historical-orders-router";
+import { OrderStack } from "./order-router";
+import { HistoricalOrdersStack } from "./historical-orders-router";
 // import HistoricalOrders from "./components/order-components/HistoricalOrders";
 import { Provider } from 'react-redux';
 import { store } from './redux';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ConnectedUpdates from "./components/update-components/Updates";
+import { View, Text } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
-
+export const Profile = () => <Text>Profile</Text>
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ class App extends React.Component {
                     style={{ backgroundColor: 'clear' }}>
                     <Tab.Screen
                         name="Restaurant"
-                        component={() => (<OrderStack />)}
+                        component={OrderStack}
                         options={{
                             tabBarLabel: 'Order',
                             tabBarIcon: ({ color }) => (
@@ -36,8 +38,7 @@ class App extends React.Component {
                     />
                     <Tab.Screen
                       name="Updates"
-
-                      component={()=>(<ConnectedUpdates/>)}
+                      component={ConnectedUpdates}
                       options={{
                         tabBarLabel: 'Updates',
                         tabBarIcon: ({ color }) => (
@@ -47,7 +48,7 @@ class App extends React.Component {
                     />
                     <Tab.Screen
                       name="Past Orders"
-                      component={() => (<HistoricalOrdersStack />)}
+                      component={HistoricalOrdersStack}
                       options={{
                         tabBarLabel: 'Past Orders',
                         tabBarIcon: ({ color }) => (
@@ -57,7 +58,7 @@ class App extends React.Component {
                     />
                     <Tab.Screen
                       name="Profile"
-                      component={()=>(<div> Profile</div>)}
+                      component={Profile}
                       options={{
                         tabBarLabel: 'Profile',
                         tabBarIcon: ({ color }) => (

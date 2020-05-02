@@ -1,10 +1,10 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import axios from 'axios'
 import {
     StyleSheet,
     View,
     FlatList,
-    Text, Alert
+    Alert
 } from "react-native";
 import ListItem from "./ListItem";
 import CartButton from "../common/CartButton";
@@ -12,8 +12,8 @@ import {connect} from "react-redux";
 import {emptyCart, fetchItems} from '../../redux';
 import { get } from 'lodash';
 import {HeaderBackButton} from "react-navigation";
-import {isMobile} from 'react-device-detect';
 import { BASE_API_URL } from 'react-native-dotenv'
+import { OrderStack } from '../../order-router'
 
 const mapDispatchToProps = (dispatch) =>{
   return {
@@ -36,15 +36,13 @@ const Items = (props) => {
     const fetchItems =  async () => {
       const response =  await axios.get(`${BASE_API_URL}/menu/${props.selectedRestaurant._id}/items`)
       props.fetchItems(response.data)
-      props.navigation.setParams({title: `${props.selectedRestaurant.name}'s Menu`})
-      props.navigation.setParams({isCartEmpty: props.isCartEmpty})
-      props.navigation.setParams({emptyCart: props.emptyCart})
+      setNavOptions({...props, headerTitle: `${props.selectedRestaurant.name}'s Menu`})
     }
     fetchItems()
   },[props.isCartEmpty])
 
   const handleNavigation = (item) => {
-    props.navigation.navigate("ItemDetails", {item});
+    props.navigation.navigate("ItemDetails", { item });
   };
   return (
     <View style={styles.container}>
@@ -70,55 +68,45 @@ const Items = (props) => {
   );
 }
 
-Items.navigationOptions = (props) => {
-    const headerTitle = props.navigation.getParam('title')
-    const isCartEmpty = props.navigation.getParam('isCartEmpty')
-    const emptyCart = props.navigation.getParam('emptyCart')
-    return {
-        headerLeft:(<HeaderBackButton
-            title='Restaurants'
-            onPress={()=>{
-                if(isCartEmpty) {
-                    props.navigation.navigate('Restaurants')
-                }
-                else{
-                    if(isMobile) {
-                        Alert.alert(
-                            'Empty Cart',
-                            'Are you sure you want to empty your cart?',
-                            [
-                                {
-                                    text: 'Empty', onPress: () => {
-                                        emptyCart()
-                                        props.navigation.navigate('Restaurants')
-                                    }
-                                },
-                                {
-                                    text: 'Cancel',
-                                    onPress: () => console.log('Cancel Pressed'),
-                                    style: 'cancel',
-                                }
-                            ]
-                        );
-                    }
-                    else {
-                        emptyCart()
-                        props.navigation.navigate('Restaurants')
-                    }
-                }
-        }}/>),
-        headerTitle,
-        headerStyle: {
-            elevation: 0,
-            shadowOpacity: 0
-        },
-        headerRight: (
-            <CartButton
-                onPress={() => { props.navigation.navigate('Cart');}}
-            />
-        )
-    };
-};
+const setNavOptions = ({navigation, isCartEmpty, emptyCart, headerTitle}) => {
+  navigation.setOptions({
+      headerLeft: () => <HeaderBackButton
+          title='Restaurants'
+          onPress={()=>{
+              if(isCartEmpty) {
+                navigation.navigate('Restaurants')
+              }
+              else{
+                  Alert.alert(
+                      'Empty Cart',
+                      'Are you sure you want to empty your cart?',
+                      [
+                          {
+                              text: 'Empty', onPress: () => {
+                                  emptyCart()
+                                  navigation.navigate('Restaurants')
+                              }
+                          },
+                          {
+                              text: 'Cancel',
+                              onPress: () => console.log('Cancel Pressed'),
+                              style: 'cancel',
+                          }
+                      ]
+                  );
+              }
+          }}/>,
+      headerTitle,
+      headerStyle: {
+          elevation: 0,
+          shadowOpacity: 0
+      },
+      headerRight: () => <CartButton
+              onPress={() => { navigation.navigate('OrderStack', {screen: 'Cart'})}}
+          />
+  })
+}
+
 const ConnectedItems = connect(mapStateToProps, mapDispatchToProps)(Items);
 
 export default ConnectedItems;

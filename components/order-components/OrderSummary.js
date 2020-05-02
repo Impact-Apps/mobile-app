@@ -11,10 +11,8 @@ import ListItem from "./ListItem";
 const OrderSummary = (props) => {
   
   const state = {
-    items: props.navigation.getParam('items')
+    items: props.route.params.items
   }
-
-  console.log('hello', state.items)
 
   return (
     <View style={styles.container}>

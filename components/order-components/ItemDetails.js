@@ -21,34 +21,32 @@ const mapStateToProps = (state) =>{
 }
 
 class ItemDetails extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      return {
-        headerTitle: navigation.getParam('item').name,
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0
-        },
-        headerRight: (
-          <CartButton
-            onPress={() => {
-              navigation.navigate('Cart');}}
-          />
-        )
-      };
-    };
-
 
   state = {
-    qty: get(this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id), 'quantity', 1),
-    inCart: !!this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id),
-    startQuantity: get(this.props.cartItems.find(item => item._id === this.props.navigation.getParam('item')._id), 'quantity', 0)
+    qty: get(this.props.cartItems.find(item => item._id === this.props.route.params.item._id), 'quantity', 1),
+    inCart: !!this.props.cartItems.find(item => item._id === this.props.route.params.item._id),
+    startQuantity: get(this.props.cartItems.find(item => item._id === this.props.route.params.item._id), 'quantity', 0)
   };
+
+  componentWillMount() {
+    this.props.navigation.setOptions({
+      headerTitle: this.props.route.params.item.name,
+          headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0
+          },
+          headerRight: () => <CartButton
+              onPress={() => {
+                this.props.navigation.navigate('Cart');}}
+            />
+    })
+  }
 
 
   constructor(props) {
     super(props);
-    const {navigation} = this.props;
-    this.item = navigation.getParam('item');
+    const {route} = this.props;
+    this.item = route.params.item;
   };
 
   qtyChanged = value => {
@@ -57,19 +55,12 @@ class ItemDetails extends React.Component {
   };
 
   addToCart = (item, qty) => {
-    Alert.alert(
-      'Added to basket',
-      `${qty} ${item.name} was added to the basket.`,
-    );
     this.props.addToCart({...item, quantity: qty});
     const {navigation} = this.props;
     navigation.goBack();
   };
 
   removeFromCart = (item) => {
-    Alert.alert(
-      `Removed ${item.name} from basket`,
-    );
     this.props.removeItemFromCart(item);
     const {navigation} = this.props;
     navigation.goBack();
