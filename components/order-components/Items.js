@@ -102,7 +102,7 @@ const setNavOptions = ({navigation, isCartEmpty, emptyCart, headerTitle}) => {
           shadowOpacity: 0
       },
       headerRight: () => <CartButton
-              onPress={() => { navigation.navigate('OrderStack', {screen: 'Cart'})}}
+              onPress={() => { navigation.navigate('Cart')}}
           />
   })
 }

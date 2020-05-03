@@ -83,6 +83,7 @@ target 'mobileApp' do
   end
 
   use_native_modules!
+  # use_frameworks!
 
   # Enables Flipper.
   #
