@@ -9,3 +9,4 @@
 - react-native start --reset-cache
 - https://github.com/robbiehanson/XMPPFramework/issues/660
 - In Xcode -> File -> Workspace settings -> Use legacy build
+- sudo xcode-select --switch /Applications/Xcode.app
