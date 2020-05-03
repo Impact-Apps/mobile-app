@@ -12,6 +12,7 @@ import {BASE_API_URL} from "react-native-dotenv";
 import Blah from "../../blah";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 import { useIsFocused } from '@react-navigation/native';
+import RNEventSource from 'react-native-event-source'
 
 
 // todo -> query for my orders which are pending and active
@@ -45,8 +46,7 @@ const Updates = (props) => {
     const isFocus = useIsFocused()
     useEffect(  () =>  {
         //todo move to SW.js
-        const source = new EventSource('http://localhost:3003/api/events')
-        source.onopen = () => console.log('conntected')
+        const source = new RNEventSource(`${BASE_API_URL}/events`)
         const initialFetch = async () => {
             const response =  await fetchOrders()
             props.getActiveOrders(response)
@@ -59,7 +59,7 @@ const Updates = (props) => {
 
 
     return (
-        <div>
+        <View>
             {isFocus ? props.orders.map((order, index) => {
                 const progress = order.status === 'pending' ? 33 : 66
                 const animateFromValue = order.status === 'pending' ? 0 : 33
@@ -75,7 +75,7 @@ const Updates = (props) => {
                     />
                 )
             }):null}
-        </div>
+        </View>
     )
 }
 

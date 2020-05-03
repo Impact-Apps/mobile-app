@@ -42,7 +42,7 @@ const HistoricalOrders = (props) => {
         const response =  await fetchHistoricalOrders()
         // console.log(response)
         props.fetchHistoricalOrders(response)
-        console.log(props, 'hitpricals')
+        // console.log(props, 'hitpricals')
 
     }
     initialFetch()

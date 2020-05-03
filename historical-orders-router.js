@@ -1,25 +1,22 @@
-import { createStackNavigator } from "react-navigation";
 import HistoricalOrders from "./components/order-components/HistoricalOrders";
 import OrderSummary from "./components/order-components/OrderSummary";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const HistoricalOrdersStack = createStackNavigator({
-
-  HistoricalOrders: {
-    screen: HistoricalOrders,
-    navigationOptions: {
-      title: "Past Orders",
-      headerBackTitle: 'Past Orders',
-      gesturesEnabled: false,
-    }
-  },
-  OrderSummary: {
-    screen: OrderSummary,
-    navigationOptions: {
-      title: "Order Summary",
-      headerBackTitle: 'Order Summary',
-      gesturesEnabled: false,
-    }
-  },
-});
-
-export default HistoricalOrdersStack;
+const Stack = createStackNavigator();
+export function HistoricalOrdersStack(){
+  return(
+      <Stack.Navigator>
+        <Stack.Screen name="PastOrders" component={HistoricalOrders} options={{
+          title: "Past Orders",
+          headerBackTitle: 'Past Orders',
+          gestureEnabled: false,
+        }} />
+        <Stack.Screen name="OrderSummary" component={OrderSummary} options={{
+          title: "Order Summary",
+          headerBackTitle: 'Order Summary',
+          gestureEnabled: false,
+        }} />
+      </Stack.Navigator>
+  )
+}

@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
-import {isMobile} from 'react-device-detect';
+
 const mapDispatchToProps = (dispatch) =>{
   return {
     emptyCart: () => dispatch(emptyCart()),
@@ -65,7 +65,7 @@ const Cart = (props) => {
             <View style={styles.itemContainer}>
                 <Button
                     onPress={() => {
-                        if(isMobile) {
+                        
                             Alert.alert(
                                 'Empty Cart',
                                 'Are you sure you want to empty your cart?',
@@ -78,10 +78,6 @@ const Cart = (props) => {
                                     }
                                 ]
                             );
-                        }
-                        else{
-                            props.emptyCart()
-                        }
                     }}
                     title="Empty cart"
                     color="#c53c3c"
