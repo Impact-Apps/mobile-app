@@ -24,6 +24,7 @@
 		3779862FCF9BC4AAD4D19F90 /* libPods-mobileApp-mobileAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA50A071CBF7B5E6FD550B6 /* libPods-mobileApp-mobileAppTests.a */; };
 		43D17173F55B49B29AEDAA89 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4ADE8438F62143E2BFEAE526 /* Entypo.ttf */; };
 		49CAAF0EF12C47AF9873D7D4 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B9C408AA72A4909802A5A40 /* FontAwesome5_Brands.ttf */; };
+		5474C9E7308B86C93CAE26C7 /* libPods-mobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4E329B80084F6353D06BAA /* libPods-mobileApp.a */; };
 		54800E70CF324EE89E909982 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57818E9211894DA88876C8EA /* Octicons.ttf */; };
 		A7F3DCF6E340415FA7EFF469 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64886F4227C944589A5B89E9 /* MaterialIcons.ttf */; };
 		AA5FB79001227A1C60AFFB15 /* libPods-mobileApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE11B31FB146A06B6622E9D /* libPods-mobileApp-tvOS.a */; };
@@ -35,7 +36,6 @@
 		DDC76C16FE2444F39CE24EAF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3700200AA9644FDBF481E62 /* Foundation.ttf */; };
 		E9E2C64450EA456B96E4F37D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C88A7B7A0024505BD1D54D4 /* Zocial.ttf */; };
 		EB77D8E8B2A94091B79A5869 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C1005F6F30D4E09B5859EC8 /* FontAwesome5_Regular.ttf */; };
-		EDD3C7FB70B9F8E7FBBB054F /* libPods-mobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4E329B80084F6353D06BAA /* libPods-mobileApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDD3C7FB70B9F8E7FBBB054F /* libPods-mobileApp.a in Frameworks */,
+				5474C9E7308B86C93CAE26C7 /* libPods-mobileApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-auth0
+import com.auth0.react.A0Auth0Package;
 // react-native-charts-wrapper
 import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 // react-native-config
@@ -75,6 +77,7 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new RNCMaskedViewPackage(),
+      new A0Auth0Package(),
       new MPAndroidChartPackage(),
       new ReactNativeConfigPackage(),
       new RNGestureHandlerPackage(),

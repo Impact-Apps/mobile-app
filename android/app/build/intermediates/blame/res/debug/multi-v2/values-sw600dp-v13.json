@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/cathal.hughes/personal_projects/order/mobile-app/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "/Users/liammcaweeney/private-projects/mobile-app/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/cathal.hughes/.gradle/caches/transforms-2/files-2.1/c58ca7c082f1a11495f89e31dc3f6057/material-1.0.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/liammcaweeney/.gradle/caches/transforms-2/files-2.1/c58ca7c082f1a11495f89e31dc3f6057/material-1.0.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/cathal.hughes/.gradle/caches/transforms-2/files-2.1/2b7e6ebaa515cd43f42fb356f0d1941c/appcompat-1.1.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/liammcaweeney/.gradle/caches/transforms-2/files-2.1/2b7e6ebaa515cd43f42fb356f0d1941c/appcompat-1.1.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
