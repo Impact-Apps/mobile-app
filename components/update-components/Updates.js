@@ -9,7 +9,6 @@ import {connect} from "react-redux";
 import {getActiveOrders} from "../../orders-store";
 import axios from "axios";
 import {BASE_API_URL} from "react-native-dotenv";
-import Blah from "../../blah";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 import { useIsFocused } from '@react-navigation/native';
 import RNEventSource from 'react-native-event-source'
