@@ -1,4 +1,0 @@
-#Sat May 02 21:36:31 IST 2020
-base.0=/Users/cathal.hughes/personal_projects/order/mobile-app/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
