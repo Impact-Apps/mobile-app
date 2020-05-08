@@ -4,6 +4,7 @@ import {
     createStore,
 } from 'redux';
 import { orders} from "./orders-store";
+import {user} from "./user-store";
 
 // cart
 // actions.js
@@ -107,7 +108,8 @@ export const reducers = combineReducers({
     restaurantDetails,
     items,
     order,
-    orders
+    orders,
+    user
 });
 
 export function configureStore(initialState = {}) {
