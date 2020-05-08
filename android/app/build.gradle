@@ -191,6 +191,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':@react-native-community_async-storage')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

@@ -35,16 +35,16 @@ class App extends React.Component {
                                 ),
                             }}
                         />
-                        <Tab.Screen
-                            name="Updates"
-                            component={ConnectedUpdates}
-                            options={{
-                                tabBarLabel: 'Updates',
-                                tabBarIcon: ({color}) => (
-                                    <MaterialCommunityIcons name="bell" color={color} size={26}/>
-                                ),
-                            }}
-                        />
+                        {/*<Tab.Screen*/}
+                        {/*    name="Updates"*/}
+                        {/*    component={ConnectedUpdates}*/}
+                        {/*    options={{*/}
+                        {/*        tabBarLabel: 'Updates',*/}
+                        {/*        tabBarIcon: ({color}) => (*/}
+                        {/*            <MaterialCommunityIcons name="bell" color={color} size={26}/>*/}
+                        {/*        ),*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                         <Tab.Screen
                             name="Past Orders"
                             component={HistoricalOrdersStack}

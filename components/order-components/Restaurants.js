@@ -18,7 +18,8 @@ const mapDtoP = (dispatch) =>{
 
 const mapStateToProps = (state) =>{
   return {
-    restaurants: state.restaurantDetails.restaurants
+    restaurants: state.restaurantDetails.restaurants,
+    user: state.user
   }
 }
 
@@ -30,7 +31,7 @@ const Restaurants = (props) => {
       props.fetchRestaurants(response.data)
     }
     fetchRestaurant()
-  },[])
+  },[props.user])
 
 
 

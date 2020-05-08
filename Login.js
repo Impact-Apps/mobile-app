@@ -1,13 +1,16 @@
 import 'react-native-gesture-handler';
 import React from "react";
-import {View, Button, Alert} from 'react-native';
+import {View, Button, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Auth0 from 'react-native-auth0';
 import {logoutUser, setUser} from "./user-store";
 import {connect} from "react-redux";
 import axios from "axios";
 import {BASE_API_URL} from "react-native-dotenv";
-const auth0 = new Auth0({ domain: 'impact-apps.eu.auth0.com', clientId: 'In5Sed5tKPvCSPF9Uf13vgZUCOfvcT50', scope: 'openid profile', responseType: 'token id_token'});
-
+const auth0 = new Auth0({
+    domain: 'impact-apps.eu.auth0.com',
+    clientId: 'In5Sed5tKPvCSPF9Uf13vgZUCOfvcT50'
+});
 
 const mapDispatchToProps = (dispatch) =>{
     return {
@@ -33,40 +36,43 @@ const Login = (props) => {
     const login =  () => {
         auth0
             .webAuth
-            .authorize()
+            .authorize({
+                scope: 'openid profile',
+                audience: 'http://order-backend.com'
+            })
             .then(credentials => {
                 auth0.webAuth.client
                     .userInfo({ token: credentials.accessToken })
-                    .then(auth =>{
-                        getOrCreateUser(auth.sub).then((user)=>{
-                            props.setUser({auth, user})
-                        }
+                    .then(async auth =>{
+                        try {
+                            await AsyncStorage.setItem('accessToken', credentials.accessToken)
 
-                        )
+                        } catch (error) {
+                            console.log(error)
+                        }
+                        const user = await getOrCreateUser(auth.sub)
+                        props.setUser({auth, user})
                     })
             })
             .catch(error => console.log(error));
     }
 
-    const logout =  () => {
-        console.log('Log out attempt');
-        auth0.webAuth
-            .clearSession({})
-            .then(success => {
-                Alert.alert(
-                    'Logged out!'
-                );
-                props.logoutUser()
-            })
-            .catch(error => {
-                console.log(error);
-                console.log('Log out cancelled');
-            });
-
+    const logout =  async () => {
+        try {
+            console.log('Log out attempt');
+            await auth0.webAuth
+                .clearSession({})
+            props.logoutUser()
+            await AsyncStorage.removeItem('accessToken')
+            Alert.alert('Logged out!');
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     return(
-        <View>
+        <View style={{padding:40}}>
             <Button
                 onPress={login}
                 title="Login"
