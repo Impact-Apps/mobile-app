@@ -51,6 +51,7 @@ const Login = (props) => {
                             console.log(error)
                         }
                         const user = await getOrCreateUser(auth.sub)
+                        auth.accessToken = credentials.accessToken
                         props.setUser({auth, user})
                     })
             })

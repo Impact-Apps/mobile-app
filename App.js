@@ -11,6 +11,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ConnectedUpdates from "./components/update-components/Updates";
+import ConnectedPayment from "./components/payment-components/Payment"
 
 const Tab = createMaterialBottomTabNavigator();
 class App extends React.Component {
@@ -35,21 +36,31 @@ class App extends React.Component {
                                 ),
                             }}
                         />
-                        {/*<Tab.Screen*/}
-                        {/*    name="Updates"*/}
-                        {/*    component={ConnectedUpdates}*/}
-                        {/*    options={{*/}
-                        {/*        tabBarLabel: 'Updates',*/}
-                        {/*        tabBarIcon: ({color}) => (*/}
-                        {/*            <MaterialCommunityIcons name="bell" color={color} size={26}/>*/}
-                        {/*        ),*/}
-                        {/*    }}*/}
-                        {/*/>*/}
+                        <Tab.Screen
+                            name="Updates"
+                            component={ConnectedUpdates}
+                            options={{
+                                tabBarLabel: 'Updates',
+                                tabBarIcon: ({color}) => (
+                                    <MaterialCommunityIcons name="bell" color={color} size={26}/>
+                                ),
+                            }}
+                        />
                         <Tab.Screen
                             name="Past Orders"
                             component={HistoricalOrdersStack}
                             options={{
                                 tabBarLabel: 'Past Orders',
+                                tabBarIcon: ({color}) => (
+                                    <MaterialCommunityIcons name="history" color={color} size={26}/>
+                                ),
+                            }}
+                        />
+                        <Tab.Screen
+                            name="Payments"
+                            component={ConnectedPayment}
+                            options={{
+                                tabBarLabel: 'Payments',
                                 tabBarIcon: ({color}) => (
                                     <MaterialCommunityIcons name="history" color={color} size={26}/>
                                 ),

@@ -13,6 +13,7 @@ import Blah from "../../blah";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 import { useIsFocused } from '@react-navigation/native';
 import RNEventSource from 'react-native-event-source'
+import AsyncStorage from "@react-native-community/async-storage";
 
 
 // todo -> query for my orders which are pending and active
@@ -25,7 +26,8 @@ const mapDispatchToProps = (dispatch) =>{
 const mapStateToProps = (state) =>{
     return {
         orders: state.orders.active,
-        order: state.order
+        order: state.order,
+        token: state.user.auth.accessToken
     }
 }
 
@@ -41,12 +43,12 @@ export const fetchOrders =  async () => {
     return response.data
 }
 
-
 const Updates = (props) => {
     const isFocus = useIsFocused()
-    useEffect(  () =>  {
+    useEffect( () =>  {
         //todo move to SW.js
-        const source = new RNEventSource(`${BASE_API_URL}/events`)
+        const options = { headers: { Authorization: `Bearer ${props.token}` } };
+        const source = new RNEventSource(`${BASE_API_URL}/events`, options)
         const initialFetch = async () => {
             const response =  await fetchOrders()
             props.getActiveOrders(response)
