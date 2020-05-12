@@ -78,6 +78,7 @@ target 'mobileApp' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
+
   target 'mobileAppTests' do
     inherit! :complete
     # Pods for testing
