@@ -46,6 +46,7 @@
     "react-redux": "^7.2.0",
     "react-simple-stepper": "^1.0.1",
     "redux": "^4.0.5",
+    "rn-eventsource": "^1.0.0",
     "tipsi-stripe": "^7.5.3"
   },
   "devDependencies": {

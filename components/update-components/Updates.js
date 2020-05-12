@@ -9,11 +9,9 @@ import {connect} from "react-redux";
 import {getActiveOrders} from "../../orders-store";
 import axios from "axios";
 import {BASE_API_URL} from "react-native-dotenv";
-import Blah from "../../blah";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 import { useIsFocused } from '@react-navigation/native';
-import RNEventSource from 'react-native-event-source'
-import AsyncStorage from "@react-native-community/async-storage";
+import EventSource from 'rn-eventsource';
 
 
 // todo -> query for my orders which are pending and active
@@ -27,15 +25,16 @@ const mapStateToProps = (state) =>{
     return {
         orders: state.orders.active,
         order: state.order,
-        token: state.user.auth.accessToken
+        token: state.user.auth.accessToken,
+        userId: state.user.user._id,
     }
 }
 
-export const fetchOrders =  async () => {
+export const fetchOrders =  async (userId) => {
     // user_id active pending
     const params = {
         filter: {
-            userId: 123,
+            userId,
             status: {$in: ["pending", "active"]}
         }
     }
@@ -48,12 +47,13 @@ const Updates = (props) => {
     useEffect( () =>  {
         //todo move to SW.js
         const options = { headers: { Authorization: `Bearer ${props.token}` } };
-        const source = new RNEventSource(`${BASE_API_URL}/events`, options)
+        const source = new EventSource(`${BASE_API_URL}/events`, options)
         const initialFetch = async () => {
-            const response =  await fetchOrders()
+            const response = await fetchOrders(props.userId)
             props.getActiveOrders(response)
         }
-        source.addEventListener('orderUpdated-123', async () => {
+        source.addEventListener(`orderUpdated-${props.userId}`, async () => {
+            console.log('user updated')
             await initialFetch()
         })
         initialFetch()

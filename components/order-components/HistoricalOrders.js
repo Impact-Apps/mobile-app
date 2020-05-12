@@ -19,16 +19,18 @@ const mapDispatchToProps = (dispatch) =>{
 const mapStateToProps = (state) =>{
   return {
     historicalOrders: state.orders.historical,
+    userId: state.user.user._id,
   }
 }
 
-export const fetchHistoricalOrders =  async () => {
+export const fetchHistoricalOrders = async (userId) => {
     const params = {
         filter: {
-            userId: 123,
+            userId,
             status: 'done'
         }
     }
+    console.warn(params)
     const response =  await axios.get(`${BASE_API_URL}/order/`, {params})
     return response.data
 }
@@ -39,7 +41,7 @@ const HistoricalOrders = (props) => {
 
   useEffect( () =>  {
     const initialFetch = async () => {
-        const response =  await fetchHistoricalOrders()
+        const response =  await fetchHistoricalOrders(props.userId)
         // console.log(response)
         props.fetchHistoricalOrders(response)
         // console.log(props, 'hitpricals')

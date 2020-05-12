@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Button } from 'react-native';
 import stripe from 'tipsi-stripe';
 import axios from 'axios';
@@ -16,16 +16,15 @@ const mapStateToProps = (state) =>{
 
 
 const Payment = (props) =>  {
-
-    const doPayment = async (amount, tokenId) => {
+    const [isPaymentPending, updatePaymentStatus] = useState(false);
+    const doPayment = async (tokenId) => {
         const body = {
-            amount,
+            amount: props.amount * 100,
             tokenId,
             userId: props.user.user._id,
             stripeAccountId: 'acct_1Gga61LK3s7xe9vD',
             email: props.user.auth.name
         };
-        console.log(body);
           return axios
             .post(`${BASE_API_URL}/payment/doPayment`, body)
             .then(({ data }) => {
@@ -35,38 +34,36 @@ const Payment = (props) =>  {
               return Promise.reject('Error in making payment', error);
             });
         };
-  const state = {
-    isPaymentPending: false,
-  }
+  
   const requestPayment = () => {
-    // setState({ isPaymentPending: true });
-    state.isPaymentPending = true;
-
+    updatePaymentStatus(true)
     console.log(props.user.auth.name, props.user.user._id)
     return stripe
         .paymentRequestWithCardForm()
         .then(stripeTokenInfo => {
-        return doPayment(100, stripeTokenInfo.tokenId);
+          return doPayment(stripeTokenInfo.tokenId);
+
         })
         .then(() => {
         console.warn('Payment succeeded!');
+        props.submitOrder()
         })
         .catch(error => {
         console.warn('Payment failed', { error });
         })
         .finally(() => {
-            state.isPaymentPending = false
+            updatePaymentStatus(false)
         });
   };
  
 return (
-    <View style={styles.container}>
+    // <View style={styles.container}>
     <Button
-        title="Make a payment"
+        title="Pay Now"
         onPress={requestPayment}
-        disabled={state.isPaymentPending}
+        disabled={isPaymentPending}
     />
-    </View>
+    // </View>
 );
   
 }

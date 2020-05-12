@@ -11,11 +11,13 @@ import { BASE_API_URL } from 'react-native-dotenv'
 import { emptyCart, resetOrder } from "../../redux";
 import {getActiveOrders} from "../../orders-store";
 import {fetchOrders} from "../update-components/Updates";
+import Payment from '../payment-components/Payment'
 
 
 const mapStateToProps = (state) =>{
   return {
-    order: state.order
+    order: state.order,
+    userId: state.user.user._id
   }
 }
 
@@ -27,11 +29,11 @@ const mapDispatchToProps = (dispatch) =>{
     }
   }
 
-const postOrder = async (order) => {
+const postOrder = async (order, userId) => {
     const orderObject = {
         restaurantId: order.restaurant._id,
         ...order,
-        userId: 123
+        userId,
     }
     await axios.post(`${BASE_API_URL}/order/`, orderObject)
 }
@@ -40,10 +42,11 @@ const postOrder = async (order) => {
 const Checkout = (props) => {
 
         async function payNow() {
-            await postOrder(props.order)
+            console.warn(props.userId)
+            await postOrder(props.order, props.userId)
             props.emptyCart()
             props.navigation.navigate('Items')
-            const response = await fetchOrders(props)
+            const response = await fetchOrders(props.userId)
             props.getActiveOrders(response)
         }
 
@@ -71,8 +74,7 @@ const Checkout = (props) => {
                   fontWeight: "bold",
                   color: "#ef6136"
                 }}>{props.order.location}</Text>
-            <Button title="Pay Now" onPress={ async () => {await payNow()}}/>
-
+            <Payment submitOrder={payNow} amount={props.order.total} />
         </View>
     )
 }
