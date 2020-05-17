@@ -1,4 +1,5 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
+import Geolocation from '@react-native-community/geolocation';
 import {
   StyleSheet,
   View,
@@ -9,6 +10,7 @@ import {connect} from "react-redux";
 import { selectRestaurant, fetchRestaurants} from '../../redux';
 import axios from 'axios'
 import { BASE_API_URL } from 'react-native-dotenv'
+
 const mapDtoP = (dispatch) =>{
   return {
     selectRestaurant: restaurant => dispatch(selectRestaurant(restaurant)),
@@ -24,9 +26,25 @@ const mapStateToProps = (state) =>{
 
 const Restaurants = (props) => {
 
+  const [x, updateLocation] = useState({coords:{longitude:0,latitude:0}})
+
   useEffect(  () =>  {
+
+    const fetchLocation =  async () => {
+      Geolocation.getCurrentPosition(info => {
+        console.log(info)
+        updateLocation(info)
+      });
+    }
+    fetchLocation()
+
     const fetchRestaurant =  async () => {
-      const response =  await axios.get(`${BASE_API_URL}/restaurant`)
+      const response =  await axios.get(`${BASE_API_URL}/restaurant`, {
+        params: {
+          latitude: x.coords.latitude,
+          longitude: x.coords.longitude
+        }
+      })
       props.fetchRestaurants(response.data)
     }
     fetchRestaurant()
