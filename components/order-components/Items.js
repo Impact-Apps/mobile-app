@@ -13,7 +13,6 @@ import {emptyCart, fetchItems} from '../../redux';
 import { get } from 'lodash';
 import {HeaderBackButton} from "react-navigation";
 import { BASE_API_URL } from 'react-native-dotenv'
-import { OrderStack } from '../../order-router'
 
 const mapDispatchToProps = (dispatch) =>{
   return {

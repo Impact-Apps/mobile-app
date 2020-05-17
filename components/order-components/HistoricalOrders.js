@@ -30,7 +30,6 @@ export const fetchHistoricalOrders = async (userId) => {
             status: 'done'
         }
     }
-    console.warn(params)
     const response =  await axios.get(`${BASE_API_URL}/order/`, {params})
     return response.data
 }
@@ -59,17 +58,15 @@ const HistoricalOrders = (props) => {
       <FlatList // Might have to get rid of this 
         data={props.historicalOrders}
         keyExtractor={order => order._id}
-        renderItem={({ item }) => {
+        renderItem={({ order }) => {
             return (
-                // console.log(order)
                 <OrderItem
-                    restaurantId={item.restaurantId}
-                    orderedAt={item.createdAt.split('T')[0]}
-                    numberOfItems={item.items.length}
-                    total={item.total}
-                    handleNavigation={() => handleNavigation(item.items)}
+                    restaurantId={order.restaurantId}
+                    orderedAt={order.createdAt.split('T')[0]}
+                    numberOfItems={order.items.length}
+                    total={order.total}
+                    handleNavigation={() => handleNavigation(order.items)}
                 />
-                // <Text>{order.total}</Text>
             )
         }
     }

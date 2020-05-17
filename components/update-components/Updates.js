@@ -12,7 +12,7 @@ import {BASE_API_URL} from "react-native-dotenv";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
 import { useIsFocused } from '@react-navigation/native';
 import EventSource from 'rn-eventsource';
-
+import { get } from 'lodash'
 
 // todo -> query for my orders which are pending and active
 const mapDispatchToProps = (dispatch) =>{
@@ -25,8 +25,8 @@ const mapStateToProps = (state) =>{
     return {
         orders: state.orders.active,
         order: state.order,
-        token: state.user.auth.accessToken,
-        userId: state.user.user._id,
+        token: get(state, "user.auth.accessToken"),
+        userId: get(state,"user.user._id")
     }
 }
 

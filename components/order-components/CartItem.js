@@ -3,7 +3,8 @@ import {
     Text,
     View,
     Image,
-    StyleSheet, Button, Alert
+    StyleSheet,
+    Button
 } from "react-native";
 
 import {SimpleStepper} from "react-native-simple-stepper";
