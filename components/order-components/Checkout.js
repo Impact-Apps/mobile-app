@@ -29,11 +29,13 @@ const mapDispatchToProps = (dispatch) =>{
     }
   }
 
-const postOrder = async (order, userId) => {
+const postOrder = async (order, userId, tokenId, amount) => {
     const orderObject = {
         restaurantId: order.restaurant._id,
         ...order,
         userId,
+        tokenId,
+        amount
     }
     await axios.post(`${BASE_API_URL}/order/`, orderObject)
 }
@@ -41,9 +43,9 @@ const postOrder = async (order, userId) => {
 
 const Checkout = (props) => {
 
-        async function payNow() {
+        async function payNow(tokenId, amount) {
             console.warn(props.userId)
-            await postOrder(props.order, props.userId)
+            await postOrder(props.order, props.userId, tokenId, amount)
             props.emptyCart()
             props.navigation.navigate('Items')
             const response = await fetchOrders(props.userId)

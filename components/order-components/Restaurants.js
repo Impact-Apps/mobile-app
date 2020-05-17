@@ -31,7 +31,7 @@ const Restaurants = (props) => {
       props.fetchRestaurants(response.data)
     }
     fetchRestaurant()
-  },[props.user])
+  },[])
 
 
 

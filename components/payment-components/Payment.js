@@ -11,42 +11,23 @@ stripe.setOptions({
 const mapStateToProps = (state) =>{
     return {
         user: state.user,
+        restaurantId: state.restaurantDetails.selectedRestaurant._id
     }
 }
 
 
 const Payment = (props) =>  {
     const [isPaymentPending, updatePaymentStatus] = useState(false);
-    const doPayment = async (tokenId) => {
-        const body = {
-            amount: props.amount * 100,
-            tokenId,
-            userId: props.user.user._id,
-            stripeAccountId: 'acct_1Gga61LK3s7xe9vD',
-            email: props.user.auth.name
-        };
-          return axios
-            .post(`${BASE_API_URL}/payment/doPayment`, body)
-            .then(({ data }) => {
-              return data;
-            })
-            .catch(error => {
-              return Promise.reject('Error in making payment', error);
-            });
-        };
   
   const requestPayment = () => {
     updatePaymentStatus(true)
-    console.log(props.user.auth.name, props.user.user._id)
     return stripe
         .paymentRequestWithCardForm()
         .then(stripeTokenInfo => {
-          return doPayment(stripeTokenInfo.tokenId);
-
+            return props.submitOrder(stripeTokenInfo.tokenId, props.amount * 100)
         })
         .then(() => {
-        console.warn('Payment succeeded!');
-        props.submitOrder()
+        console.warn('Order succeeded!');
         })
         .catch(error => {
         console.warn('Payment failed', { error });
@@ -57,23 +38,14 @@ const Payment = (props) =>  {
   };
  
 return (
-    // <View style={styles.container}>
     <Button
         title="Pay Now"
         onPress={requestPayment}
         disabled={isPaymentPending}
     />
-    // </View>
 );
   
 }
-const styles = {
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-};
 
 const ConnectedPayment = connect(mapStateToProps, null)(Payment);
 

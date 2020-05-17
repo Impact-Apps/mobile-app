@@ -3,7 +3,6 @@ import React from "react";
 import { OrderStack } from "./order-router";
 import { HistoricalOrdersStack } from "./historical-orders-router";
 import Login from "./Login";
-// import HistoricalOrders from "./components/order-components/HistoricalOrders";
 import { Provider } from 'react-redux';
 import { store } from './redux';
 
@@ -11,7 +10,6 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ConnectedUpdates from "./components/update-components/Updates";
-import ConnectedPayment from "./components/payment-components/Payment"
 
 const Tab = createMaterialBottomTabNavigator();
 class App extends React.Component {
@@ -51,16 +49,6 @@ class App extends React.Component {
                             component={HistoricalOrdersStack}
                             options={{
                                 tabBarLabel: 'Past Orders',
-                                tabBarIcon: ({color}) => (
-                                    <MaterialCommunityIcons name="history" color={color} size={26}/>
-                                ),
-                            }}
-                        />
-                        <Tab.Screen
-                            name="Payments"
-                            component={ConnectedPayment}
-                            options={{
-                                tabBarLabel: 'Payments',
                                 tabBarIcon: ({color}) => (
                                     <MaterialCommunityIcons name="history" color={color} size={26}/>
                                 ),

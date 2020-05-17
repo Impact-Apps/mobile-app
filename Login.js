@@ -52,6 +52,7 @@ const Login = (props) => {
                         }
                         const user = await getOrCreateUser(auth.sub)
                         auth.accessToken = credentials.accessToken
+                        // todo - spread or only save what we need
                         props.setUser({auth, user})
                     })
             })
