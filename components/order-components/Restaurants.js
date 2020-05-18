@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import RestaurantItem from "./RestaurantItem";
 import {connect} from "react-redux";
-import { selectRestaurant, fetchRestaurants} from '../../redux';
+import { selectRestaurant, fetchRestaurants} from '../../stores/redux';
 import axios from 'axios'
 import { BASE_API_URL } from 'react-native-dotenv'
 
@@ -20,7 +20,8 @@ const mapDtoP = (dispatch) =>{
 
 const mapStateToProps = (state) =>{
   return {
-    restaurants: state.restaurantDetails.restaurants
+    restaurants: state.restaurantDetails.restaurants,
+    user: state.user
   }
 }
 

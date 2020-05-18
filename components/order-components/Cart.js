@@ -4,12 +4,12 @@ import {
     StyleSheet,
     Text,
     View,
-    Picker,
+    Picker, FlatList,
 } from "react-native";
 import { round } from 'lodash'
 import EmptyCart from "../common/EmptyCart";
 import {connect} from "react-redux";
-import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../redux";
+import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../stores/redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
 
@@ -34,25 +34,28 @@ const mapStateToProps = (state) =>{
 const Cart = (props) => {
     const [selectedValue, setSelectedValue] = useState("Collection");
     let total = props.totalPrice
+
+
     return props.cart.length === 0 ? (<EmptyCart/>) :
         (<View style={styles.container}>
-            {props.cart.map((item)=>(
-                <CartItem
-                    key={item._id}
-                    name={item.name}
-                    image={item.image}
-                    cuisine={item.cuisine}
-                    price={item.price}
-                    label={item.label}
-                    isVegetarian={item.isVegetarian}
-                    quantity={item.quantity}
-                    subTotal={round(item.quantity*item.price,2)}
-                    qtyChanged={(quantity)=>{
-                        props.addToCart({...item, quantity})
-                    }}
-                    removeFromCart={()=>props.removeItemFromCart(item)}
-                />
-            ))}
+            <FlatList
+                data={props.cart}
+                keyExtractor={item => item._id}
+                renderItem={({ item }) => {
+                    return(
+                        <CartItem
+                            updateItemQuantity={(quantity) =>{
+                                props.addToCart({...item, quantity})
+                            }}
+                            name={item.name}
+                            image={item.image}
+                            quantity={item.quantity}
+                            subTotal={round(item.quantity*item.price,2)}
+                            removeItemFromCart={()=>{props.removeItemFromCart(item)}}
+
+                        />
+                    )
+                }}/>
             <Text
                 style={{
                     fontSize: 21,

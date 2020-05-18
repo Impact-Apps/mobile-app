@@ -1,5 +1,5 @@
-import HistoricalOrders from "./components/order-components/HistoricalOrders";
-import OrderSummary from "./components/order-components/OrderSummary";
+import HistoricalOrders from "../components/order-components/HistoricalOrders";
+import OrderSummary from "../components/order-components/OrderSummary";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 

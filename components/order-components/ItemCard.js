@@ -1,12 +1,8 @@
 import React from 'react';
 import {View, Text, Image, Button, Dimensions, StyleSheet} from 'react-native';
 
-import Config from 'react-native-config';
-
 import {SimpleStepper} from 'react-native-simple-stepper';
 const screenWidth = Dimensions.get('window').width;
-
-const BASE_URL = Config.NGROK_HTTPS_URL;
 
 const ItemCard = ({item, qty, qtyChanged, addToCart, restaurantName, inCart, startQuantity, removeFromCart}) => {
 const {image, price, name} = item;
