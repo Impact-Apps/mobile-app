@@ -7,8 +7,9 @@ import {
 } from "react-native";
 import OrderItem from "./OrderItem";
 import {connect} from "react-redux";
-import {getHistoricalOrders} from "../../orders-store";
+import {getHistoricalOrders} from "../../stores/orders-store";
 import { BASE_API_URL } from 'react-native-dotenv'
+import { get } from 'lodash'
 
 const mapDispatchToProps = (dispatch) =>{
   return {
@@ -19,7 +20,7 @@ const mapDispatchToProps = (dispatch) =>{
 const mapStateToProps = (state) =>{
   return {
     historicalOrders: state.orders.historical,
-    userId: state.user.user._id,
+    userId: get(state, 'user.user._id')
   }
 }
 

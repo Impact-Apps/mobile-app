@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "1.10.0",
     "@react-native-community/masked-view": "^0.1.5",
+    "@react-native-community/picker": "^1.5.0",
     "@react-navigation/bottom-tabs": "^5.0.0",
     "@react-navigation/material-bottom-tabs": "^5.1.8",
     "@react-navigation/material-top-tabs": "^5.1.14",
@@ -30,8 +31,10 @@
     "react-native-charts-wrapper": "^0.5.7",
     "react-native-device-info": "^5.5.7",
     "react-native-dotenv": "0.2.0",
+    "react-native-dropdown": "0.0.6",
     "react-native-event-source": "^1.1.0",
     "react-native-gesture-handler": "^1.5.6",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-paper": "^3.8.0",
     "react-native-progress-wheel": "^1.0.5",
     "react-native-reanimated": "^1.8.0",

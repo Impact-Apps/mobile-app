@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from "react";
-import {View, Button, Alert } from 'react-native';
+import {View, Button} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Auth0 from 'react-native-auth0';
-import {logoutUser, setUser} from "./user-store";
+import {logoutUser, setUser} from "./stores/user-store";
 import {connect} from "react-redux";
 import DeviceInfo from "react-native-device-info";
 import axios from "axios";
@@ -78,7 +78,6 @@ const Login = (props) => {
     }
 
     const setSessionTimeout = (duration) => {
-        console.log('refreshed due to timeout')
         clearTimeout(sessionTimeout);
         sessionTimeout = setTimeout(
             refreshAccessToken,

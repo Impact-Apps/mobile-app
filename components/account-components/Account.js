@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {View, Button, Alert, StyleSheet, Text} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Auth0 from 'react-native-auth0';
-import {logoutUser, setUser} from "../../user-store";
+import {logoutUser, setUser} from "../../stores/user-store";
 import {connect} from "react-redux";
 import { CommonActions } from '@react-navigation/native';
 

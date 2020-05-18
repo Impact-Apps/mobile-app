@@ -7,8 +7,8 @@ import {
 import axios from 'axios';
 import {connect} from "react-redux";
 import { BASE_API_URL } from 'react-native-dotenv'
-import { emptyCart } from "../../redux";
-import {getActiveOrders} from "../../orders-store";
+import { emptyCart } from "../../stores/redux";
+import {getActiveOrders} from "../../stores/orders-store";
 import {fetchOrders} from "../update-components/Updates";
 import Payment from '../payment-components/Payment'
 

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from "react";
-import Login from "../../Login";
+import Login from "../Login";
 import MainRouter from "./main-router";
 import {createStackNavigator} from "@react-navigation/stack";
 

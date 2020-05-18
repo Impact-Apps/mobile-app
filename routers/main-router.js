@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
 import React from "react";
 import { OrderStack } from "./order-router";
-import { HistoricalOrdersStack } from "../../historical-orders-router";
+import { HistoricalOrdersStack } from "./historical-orders-router";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import ConnectedUpdates from "../update-components/Updates";
+import { UpdateRouter } from "./update-router";
 import { AccountRouter } from "./account-router";
 import AsyncStorage from "@react-native-community/async-storage";
 import Auth0 from 'react-native-auth0';
@@ -64,7 +64,7 @@ class MainRouter extends React.Component {
                         />
                         <Tab.Screen
                             name="Updates"
-                            component={ConnectedUpdates}
+                            component={UpdateRouter}
                             options={{
                                 tabBarLabel: 'Updates',
                                 tabBarIcon: ({color}) => (

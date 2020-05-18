@@ -9,7 +9,7 @@ import {
 import { round } from 'lodash'
 import EmptyCart from "../common/EmptyCart";
 import {connect} from "react-redux";
-import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../redux";
+import {addToCart, emptyCart, removeItemFromCart, createOrder} from "../../stores/redux";
 import CartItem from "./CartItem";
 import { HeaderBackButton } from 'react-navigation';
 

@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import React from "react";
 import { Provider } from 'react-redux';
-import { store } from './redux';
+import { store } from './stores/redux';
 import { NavigationContainer } from '@react-navigation/native';
-import InitialRouter from "./components/routers/initial-router"
+import InitialRouter from "./routers/initial-router"
 class App extends React.Component {
     constructor(props) {
         super(props);

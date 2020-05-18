@@ -1,11 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import RestaurantsScreen from "../order-components/Restaurants";
-import CartScreen from "../order-components/Cart";
-import EmptyCartScreen from "../common/EmptyCart";
-import ItemDetailsScreen from "../order-components/ItemDetails";
-import CheckoutScreen from "../order-components/Checkout";
-import Items from "../order-components/Items";
+import RestaurantsScreen from "../components/order-components/Restaurants";
+import CartScreen from "../components/order-components/Cart";
+import EmptyCartScreen from "../components/common/EmptyCart";
+import ItemDetailsScreen from "../components/order-components/ItemDetails";
+import CheckoutScreen from "../components/order-components/Checkout";
+import Items from "../components/order-components/Items";
 const Stack = createStackNavigator();
 export function OrderStack(){
   return(

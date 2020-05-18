@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
-import Account from "../account-components/Account";
+import Account from "../components/account-components/Account";
 
 
 const Stack = createStackNavigator();

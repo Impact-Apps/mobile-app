@@ -9,7 +9,7 @@ import {
 import ListItem from "./ListItem";
 import CartButton from "../common/CartButton";
 import {connect} from "react-redux";
-import {emptyCart, fetchItems} from '../../redux';
+import {emptyCart, fetchItems} from '../../stores/redux';
 import { get } from 'lodash';
 import {HeaderBackButton} from "react-navigation";
 import { BASE_API_URL } from 'react-native-dotenv'

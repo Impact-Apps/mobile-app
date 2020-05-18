@@ -6,7 +6,7 @@ import {
     Animated
 } from "react-native";
 import {connect} from "react-redux";
-import {getActiveOrders} from "../../orders-store";
+import {getActiveOrders} from "../../stores/orders-store";
 import axios from "axios";
 import {BASE_API_URL} from "react-native-dotenv";
 import AnimatedProgressWheel from 'react-native-progress-wheel';
