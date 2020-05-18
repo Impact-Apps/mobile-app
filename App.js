@@ -10,9 +10,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ConnectedUpdates from "./components/update-components/Updates";
-import { View, Text } from 'react-native';
-import {Location} from "./components/order-components/Location.js"
-const Tab = createMaterialBottomTabNavigator();
+import { View, Text } from 'react-native';const Tab = createMaterialBottomTabNavigator();
 export const Profile = () => <Text>Profile</Text>
 class App extends React.Component {
     constructor(props) {
@@ -26,16 +24,6 @@ class App extends React.Component {
                     initialRouteName="Feed"
                     activeColor={'white'}
                     style={{ backgroundColor: 'clear' }}>
-                    <Tab.Screen
-                        name="Location"
-                        component={Location}
-                        options={{
-                            tabBarLabel: 'Location',
-                            tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="food" color={color} size={26} />
-                            ),
-                        }}
-                    />
                     <Tab.Screen
                         name="Restaurant"
                         component={OrderStack}
